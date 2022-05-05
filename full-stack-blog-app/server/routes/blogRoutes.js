@@ -1,6 +1,8 @@
 const {
   getUsersPosts,
   createBlogPost,
+  updateBlogPost,
+  deleteBlogPost
 } = require("../controllers/blogController");
 
 // auth is our custom middleware
@@ -15,5 +17,11 @@ router.get("/", auth, getUsersPosts);
 // header => x-auth-token
 // accepts : req.body =>
 router.post("/new", auth, createBlogPost);
+
+router.put("/update", updateBlogPost);
+
+router.put("/delete", deleteBlogPost);
+
+
 
 module.exports = router;

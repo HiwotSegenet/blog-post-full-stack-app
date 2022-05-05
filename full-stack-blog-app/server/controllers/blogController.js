@@ -32,4 +32,28 @@ module.exports = {
       res.json({ msg: err });
     }
   },
+
+  updateBlogPost: async(req, res)=>{
+    try{
+      const updateBlog = await Blog.findByIdAndUpdate(req.body.id,{
+        text:req.body.text,
+        subject:req.body.subject,
+        // authorId:req.body.id
+      })
+      if(updateBlog !==null) return res.json(updateBlog)
+      res.json({msg:"wrong id sent"})
+    }catch(err){
+      console.log("err")
+    }
+    } ,
+
+  deleteBlogPost: async(req, res)=>{
+    try{
+      const deleteBlog = await Blog.findByIdAndDelete(req.body.id)
+      if(deleteBlog !==null) return res.json({msg: "success"})
+      res.json({msg:"wrong id sent"})
+    }catch(err){
+      console.log("err")
+    }
+    }, 
 };

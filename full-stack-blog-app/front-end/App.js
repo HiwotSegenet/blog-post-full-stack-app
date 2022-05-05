@@ -11,13 +11,15 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [userData, setUserData] = useState({});
+  const [userToken, setUserToken] = useState("");
 
   useEffect(() => {
-    AsyncStorage.getItem("token").then((tokenRes) =>
-      console.log("we are logged in", tokenRes)
+    return AsyncStorage.getItem("token").then((tokenRes) =>
+      setUserToken(tokenRes)
     );
   }, []);
 
+  console.log(userToken);
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
@@ -32,6 +34,7 @@ export default function App() {
             <Admin
               setUserData={setUserData}
               userData={userData}
+              userToken={userToken}
               {...props}
             ></Admin>
           )}

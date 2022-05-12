@@ -144,32 +144,4 @@ const Admin = (props) => {
 
 export default Admin;
 
-/**
- * useEffect(
-    async () => {
-      const token = await loadToken();
-      const config = {
-        headers: { "x-auth-token": token },
-      };
-      return (
-        axios
-          .get(`http://${UrlString}:5054/blog/all`, config)
-          // {
-          //   authorId: props.userData.id,
-          // }
-          .then(function (res) {
-            // setToken(response);
-            //props.setBlogData([...props.blogData, res.data]);
-
-            console.log(res.data);
-          })
-          .catch(function (error) {
-            console.log(error);
-          })
-      );
-    },
-    [
-      
-    ]
-    );
- */
+//the code is broken

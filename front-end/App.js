@@ -18,6 +18,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   const [userData, setUserData] = useState({});
   const [blogData, setBlogData] = useState({});
+  const [token, setToken] = useState("");
 
   useEffect(() => {
     let UrlString = "localhost";
@@ -27,16 +28,16 @@ export default function App() {
     }
 
     AsyncStorage.getItem("token")
-      .then((tokenRes) =>
+      .then((tokenRes) => {
+        setToken(tokenRes);
         axios.get(`http://${UrlString}:5054/user`, {
           headers: { "x-auth-token": tokenRes },
-        })
-      )
+        });
+      })
       .then((userResponse) => setUserData(userResponse.data))
       .catch((err) => console.log(err));
   }, []);
 
-  //console.log(userToken);
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
@@ -45,6 +46,8 @@ export default function App() {
             <Login
               userData={userData}
               setUserData={setUserData}
+              token={token}
+              setToken={setToken}
               {...props}
             ></Login>
           )}
@@ -70,6 +73,8 @@ export default function App() {
               userData={userData}
               setBlogData={setBlogData}
               blogData={blogData}
+              token={token}
+              setToken={setToken}
               {...props}
             ></Profile>
           )}

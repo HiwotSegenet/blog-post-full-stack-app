@@ -19,11 +19,6 @@ import styles from "./styles";
 const Profile = (props) => {
   const [userBlogs, setUserBlogs] = useState();
 
-  const [updateBlog, setUpdateBlog] = useState("");
-  const [deleteBlog, setDeleteBlog] = useState("");
-
-  const [toggleEdit, setToggleEdit] = useState(false);
-
   let UrlString = "localhost";
 
   if (Platform.OS == "android") {
@@ -35,6 +30,7 @@ const Profile = (props) => {
       props.navigation.navigate("Login");
     }
     console.log(userBlogs);
+    console.log(props.userData);
   }, []);
 
   const loadToken = async () => {
@@ -55,15 +51,12 @@ const Profile = (props) => {
     return axios
       .get(`http://${UrlString}:5054/blog`, config)
       .then(function (response) {
-        //console.log(response.data);
         setUserBlogs(response.data);
       })
       .catch(function (error) {
-        // console.log(error);
+        console.log(error);
       });
   }, []);
-
-  console.log(userBlogs);
 
   const deletePost = async (id) => {
     await axios
@@ -74,15 +67,27 @@ const Profile = (props) => {
         console.log("This is res data ===>", res.data);
       })
       .then(() => {
-        console.log("Blog post dsseleted.");
+        console.log("Blog post deleted.");
         //props.navigation.navigate("Profile");
       })
       .catch(function (err) {
         console.log(err);
       });
   };
-
-  //console.log(props.blogData);
+  /*
+  const signOut = async () => {
+    props.setUserData({});
+    props.setToken("");
+    props.navigation.navigate("Login");
+    try {
+      await AsyncStorage.clear();
+      props.setUserData({});
+      props.navigation.navigate("Login");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+*/
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -91,7 +96,6 @@ const Profile = (props) => {
           <FlatList
             data={userBlogs}
             style={styles.flatlist}
-            // keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => (
               <View style={styles.flatlistContainer} key={index}>
                 <Text style={styles.blogTitle}>{item.subject}</Text>
@@ -109,13 +113,15 @@ const Profile = (props) => {
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => deletePost(item._id)}>
-                  <Text>Delete Blog 🗑️</Text>
+                  <Text>Trash 🗑️</Text>
                 </TouchableOpacity>
               </View>
             )}
-            //keyExtractor={(item) => item._id} // <--- Returns obj
-            keyExtractor={(item, index) => index.toString()} // <--- Returns Array
+            keyExtractor={(item, index) => index.toString()}
           />
+          <TouchableOpacity onPress={() => signOut()}>
+            <Text>Sign out</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -125,6 +131,7 @@ const Profile = (props) => {
 export default Profile;
 
 /**
+ * 
  * <Blog
             item={item}
             index={index}

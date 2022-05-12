@@ -61,7 +61,7 @@ module.exports = {
 
   deleteBlogPost: async (req, res) => {
     try {
-      const deleteBlog = await Blog.findByIdAndDelete(req.body.id);
+      const deleteBlog = await Blog.findByIdAndDelete(req.body._id);
       if (deleteBlog !== null) return res.json({ msg: "success" });
       res.json({ msg: "wrong id sent" });
     } catch (err) {
@@ -69,4 +69,3 @@ module.exports = {
     }
   },
 };
-//Hello from fresno

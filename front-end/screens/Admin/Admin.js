@@ -53,6 +53,7 @@ const Admin = (props) => {
       )
       .then(function (res) {
         props.setBlogData(res.data); //blogs
+        props.navigation.navigate("Profile");
       })
       .catch(function (err) {
         console.log(err);
@@ -134,7 +135,6 @@ const Admin = (props) => {
               </View>
             )}
             keyExtractor={(item) => item._id}
-            //keyExtractor={(item, index) => index.toString()}
           />
         </View>
       </View>

@@ -3,14 +3,10 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Modal,
-  Pressable,
   Platform,
-  FlatList,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import styles from "./styles";
 
@@ -49,24 +45,9 @@ const Edit = (props) => {
     if (subject && text === "") {
       Alert.alert("Please enter your Title and body text!");
     } else {
-      const todosCopy = [...props.todo];
-      todosCopy[index] = taskEdit;
-      props.setBlogData(todosCopy);
-      props.navigation.navigate("Profile");
     }
   };
 
-  /**
-   * const editPost = (index, obj) => {
-  const blogsCopyArr = [...blogs];
-  const blogToEdit = blogsCopyArr[index];
-
-  blogsCopyArr[index] = obj;
-  blogs = blogsCopyArr;
-};
-   */
-
-  //console.log(props.blogData[1]);
   return (
     <View style={styles.container}>
       <View style={styles.content}>

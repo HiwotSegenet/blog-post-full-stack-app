@@ -13,6 +13,9 @@ import styles from "./styles";
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  //const [isLogin, setIsLogin] = useState(false);
+  console.log(props.userData);
+  console.log(props.token);
 
   useEffect(() => {
     if (props.userData.id) props.navigation.navigate("Admin");
@@ -43,6 +46,8 @@ const Login = (props) => {
       .then(() => {
         console.log("Token saved");
         props.navigation.navigate("Admin");
+        setEmail("");
+        setPassword("");
       })
       .catch(function (error) {
         console.log(error);
@@ -51,32 +56,36 @@ const Login = (props) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.center}>
-        <Text>Login Page</Text>
-        <TextInput
-          style={{
-            borderWidth: 1,
-            fontSize: 18,
-          }}
-          onChangeText={setEmail}
-          value={email}
-          placeholder="Email"
-        />
-        <TextInput
-          style={{
-            borderWidth: 1,
-            fontSize: 18,
-          }}
-          onChangeText={setPassword}
-          value={password}
-          placeholder="Password"
-        />
-        <TouchableOpacity onPress={login}>
-          <Text>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={register}>
-          <Text>Register</Text>
-        </TouchableOpacity>
+      <View style={styles.headerContainer}>
+        <Text style={styles.headerText}>Welcome Back!</Text>
+      </View>
+      <View style={styles.loginContainer}>
+        <Text style={styles.loginHeader}>Login</Text>
+        <View style={styles.inputContainer}>
+          <Text>Your Email</Text>
+          <TextInput
+            style={styles.loginInput}
+            onChangeText={setEmail}
+            value={email}
+            placeholder="Email"
+          />
+          <Text>Your Password</Text>
+          <TextInput
+            style={styles.loginInput}
+            onChangeText={setPassword}
+            value={password}
+            placeholder="********"
+            secureTextEntry={true}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={login}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={register}>
+            <Text style={styles.buttonText}>Register</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

@@ -53,7 +53,15 @@ export default function App() {
           )}
         </Stack.Screen>
         <Stack.Screen name="Register" options={{ headerShown: false }}>
-          {(props) => <Register {...props}></Register>}
+          {(props) => (
+            <Register
+              userData={userData}
+              setUserData={setUserData}
+              token={token}
+              setToken={setToken}
+              {...props}
+            ></Register>
+          )}
         </Stack.Screen>
         <Stack.Screen name="Admin" options={{ headerShown: false }}>
           {(props) => (

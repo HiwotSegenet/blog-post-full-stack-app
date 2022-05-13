@@ -34,19 +34,19 @@ const Edit = (props) => {
       })
       .then(() => {
         console.log("Blog post updated");
-        //props.navigation.navigate("Profile");
+        props.navigation.navigate("Admin");
       })
       .catch(function (err) {
         console.log(err);
       });
   };
 
-  const handleTaskEdit = (index, obj) => {
-    if (subject && text === "") {
-      Alert.alert("Please enter your Title and body text!");
-    } else {
-    }
-  };
+  // const handleTaskEdit = (index, obj) => {
+  //   if (subject && text === "") {
+  //     Alert.alert("Please enter your Title and body text!");
+  //   } else {
+  //   }
+  // };
 
   return (
     <View style={styles.container}>

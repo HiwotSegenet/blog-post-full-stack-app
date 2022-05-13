@@ -41,13 +41,6 @@ const Edit = (props) => {
       });
   };
 
-  // const handleTaskEdit = (index, obj) => {
-  //   if (subject && text === "") {
-  //     Alert.alert("Please enter your Title and body text!");
-  //   } else {
-  //   }
-  // };
-
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -67,6 +60,7 @@ const Edit = (props) => {
         </TouchableOpacity>
 
         <TouchableOpacity
+          //onPress={() => updatePost(item._id, item.subject, item.text)}
           onPress={() => updatePost(props.blogData.indexOf(item))}
         >
           <Text>Publish</Text>

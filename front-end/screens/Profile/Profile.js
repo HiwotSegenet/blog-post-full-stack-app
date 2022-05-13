@@ -56,7 +56,7 @@ const Profile = (props) => {
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [userBlogs]);
 
   const deletePost = async (id) => {
     await axios
@@ -74,11 +74,11 @@ const Profile = (props) => {
         console.log(err);
       });
   };
-  /*
+
   const signOut = async () => {
-    props.setUserData({});
+    /*props.setUserData({});
     props.setToken("");
-    props.navigation.navigate("Login");
+    props.navigation.navigate("Login");*/
     try {
       await AsyncStorage.clear();
       props.setUserData({});
@@ -87,11 +87,14 @@ const Profile = (props) => {
       console.log(e);
     }
   };
-*/
+
   return (
     <View style={styles.container}>
       <View style={styles.content}>
         <Text>Hi {props.userData.userName}</Text>
+        <TouchableOpacity onPress={() => signOut()}>
+          <Text>Sign out</Text>
+        </TouchableOpacity>
         <View style={styles.blogContainer}>
           <FlatList
             data={userBlogs}
@@ -117,11 +120,9 @@ const Profile = (props) => {
                 </TouchableOpacity>
               </View>
             )}
+            //keyExtractor={(item) => item._id}
             keyExtractor={(item, index) => index.toString()}
           />
-          <TouchableOpacity onPress={() => signOut()}>
-            <Text>Sign out</Text>
-          </TouchableOpacity>
         </View>
       </View>
     </View>

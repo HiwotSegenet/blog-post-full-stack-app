@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
   },
   flatlist: {
     marginVertical: 10,
+    padding: 20,
   },
   flatlistContainer: {
     flexDirection: "column",
@@ -20,6 +21,7 @@ const styles = StyleSheet.create({
     height: 80,
     width: 300,
     margin: 10,
+    marginBottom: 40,
   },
   editButton: {
     backgroundColor: "red",

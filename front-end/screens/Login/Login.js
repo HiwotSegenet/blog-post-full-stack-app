@@ -4,18 +4,24 @@ import {
   TextInput,
   TouchableOpacity,
   Platform,
+  ImageBackground,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import styles from "./styles";
 
+import { AntDesign } from "@expo/vector-icons";
+
+const backgroundImg =
+  "/home/william/Desktop/blog-post-fullstack-app/blog-post-full-stack-app/front-end/assets/appbg.jpg";
+
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   //const [isLogin, setIsLogin] = useState(false);
   console.log(props.userData);
-  console.log(props.token);
+  //console.log(props.token);
 
   useEffect(() => {
     if (props.userData.id) props.navigation.navigate("Admin");
@@ -57,7 +63,7 @@ const Login = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>Welcome Back!</Text>
+        <Text style={styles.headerText}>Hawsa Blog!</Text>
       </View>
       <View style={styles.loginContainer}>
         <Text style={styles.loginHeader}>Login</Text>
@@ -80,15 +86,24 @@ const Login = (props) => {
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={login}>
-            <Text style={styles.buttonText}>Login</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={register}>
-            <Text style={styles.buttonText}>Register</Text>
+            <Text style={styles.buttonText}>
+              Login <AntDesign name="arrowright" size={18} color="#DFF3E4" />
+            </Text>
           </TouchableOpacity>
         </View>
+        <TouchableOpacity style={styles.register} onPress={register}>
+          <Text style={styles.registerText}>Sign up</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
 };
 
 export default Login;
+/**
+ * <ImageBackground
+      source={require(backgroundImg)}
+      resizeMode="cover"
+      style={styles.background}
+    >
+ */

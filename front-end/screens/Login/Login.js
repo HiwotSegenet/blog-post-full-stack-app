@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Platform,
   ImageBackground,
+  KeyboardAvoidingView,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -61,7 +62,7 @@ const Login = (props) => {
   };
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
       <View style={styles.headerContainer}>
         <Text style={styles.headerText}>Hawsa Blog!</Text>
       </View>
@@ -95,7 +96,7 @@ const Login = (props) => {
           <Text style={styles.registerText}>Sign up</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

@@ -38,17 +38,17 @@ const Blog = ({ item, index, userId }) => {
     console.log(toggleEdit);
   };
 
-  const updatePost = async (id, subject, text) => {
+  const updatePost = async () => {
     await axios
       .put(`http://${UrlString}:5054/blog/update`, {
-        subject: subject,
-        text: text,
+        subject: blogSubject,
+        text: blogText,
         _id: id,
       })
       .then(function (res) {
         console.log("This is res data ===>", res.data);
-        AsyncStorage.setItem("subject", res.data.subject);
-        AsyncStorage.setItem("text", res.data.text);
+        //AsyncStorage.setItem("subject", res.data.subject);
+        //AsyncStorage.setItem("text", res.data.text);
         // AsyncStorage.setItem("id", res.data.id);
       })
       .then(() => {
@@ -58,6 +58,25 @@ const Blog = ({ item, index, userId }) => {
         console.log(err);
       });
   };
+
+  /**
+   *  await axios
+      .put(`http://${UrlString}:5054/blog/update`, {
+        _id: id,
+        subject: subject,
+        text: text,
+      })
+      .then(function (res) {
+        console.log("This is res data ===>", res.data);
+      })
+      .then(() => {
+        console.log("Blog post updated");
+        props.navigation.navigate("Admin");
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+   */
 
   return (
     <View key={index}>
@@ -74,8 +93,10 @@ const Blog = ({ item, index, userId }) => {
             onChangeText={setBlogText}
           />
           <TouchableOpacity
-            onPress={() => updatePost(item._id, item.subject, item.text)}
-            //onPress={() => updatePost(props.todo.indexOf(item))}
+            onPress={() =>
+              updatePost(item._id, item.blogSubject, item.blogText)
+            }
+            //onPress={() => updatePost(props.blogData.indexOf(item))}
           >
             <Text>Edit</Text>
           </TouchableOpacity>

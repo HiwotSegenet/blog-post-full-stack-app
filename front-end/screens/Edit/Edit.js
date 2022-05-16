@@ -14,13 +14,17 @@ const Edit = (props) => {
   const { item } = props.route.params;
   const [subject, setSubject] = useState(item.subject);
   const [text, setText] = useState(item.text);
-  const id = item._id;
+  let id = item._id;
 
   let UrlString = "localhost";
 
   if (Platform.OS == "android") {
     UrlString = "10.0.2.2";
   }
+
+  console.log("this is our subject " + item.subject);
+  console.log("this is our text " + item.text);
+  console.log("this is our id " + item._id);
 
   const updatePost = async () => {
     await axios
@@ -34,6 +38,8 @@ const Edit = (props) => {
       })
       .then(() => {
         console.log("Blog post updated");
+        setSubject("");
+        setText("");
         props.navigation.navigate("Admin");
       })
       .catch(function (err) {

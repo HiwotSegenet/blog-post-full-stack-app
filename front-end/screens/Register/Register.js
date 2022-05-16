@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
-
 import axios from "axios";
 
 const Register = (props) => {

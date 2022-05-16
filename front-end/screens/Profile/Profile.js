@@ -13,7 +13,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Blog from "../../components/Blog";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
 import styles from "./styles";
 
 const Profile = (props) => {

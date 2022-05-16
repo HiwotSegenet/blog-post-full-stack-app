@@ -143,5 +143,3 @@ const Admin = (props) => {
 };
 
 export default Admin;
-
-//the code is broken

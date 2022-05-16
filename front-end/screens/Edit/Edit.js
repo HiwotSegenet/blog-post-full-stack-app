@@ -7,7 +7,6 @@ import {
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
 import styles from "./styles";
 
 const Edit = (props) => {
@@ -34,11 +33,18 @@ const Edit = (props) => {
       })
       .then(() => {
         console.log("Blog post updated");
-        props.navigation.navigate("Admin");
+        //props.navigation.navigate("Profile");
       })
       .catch(function (err) {
         console.log(err);
       });
+  };
+
+  const handleTaskEdit = (index, obj) => {
+    if (subject && text === "") {
+      Alert.alert("Please enter your Title and body text!");
+    } else {
+    }
   };
 
   return (
@@ -60,7 +66,6 @@ const Edit = (props) => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          //onPress={() => updatePost(item._id, item.subject, item.text)}
           onPress={() => updatePost(props.blogData.indexOf(item))}
         >
           <Text>Publish</Text>

@@ -20,7 +20,7 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   const [userData, setUserData] = useState({});
-  const [blogData, setBlogData] = useState({});
+  const [blogData, setBlogData] = useState([]);
   //const [token, setToken] = useState("");
 
   useEffect(() => {

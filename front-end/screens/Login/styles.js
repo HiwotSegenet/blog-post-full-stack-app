@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     alignItems: "center",
-    marginTop: 200,
+    //marginTop: 200,
+    marginTop: "40%",
   },
   loginContainer: {
     alignContent: "center",

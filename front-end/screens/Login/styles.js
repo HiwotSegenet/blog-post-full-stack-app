@@ -2,25 +2,32 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#DFF3E4",
+    //backgroundColor: "#DFF3E4",
+  },
+  background: {
+    flex: 1,
   },
   headerContainer: {
     alignItems: "center",
-    marginTop: 80,
+    //marginTop: 200,
+    marginTop: "40%",
   },
   loginContainer: {
     alignContent: "center",
     alignItems: "center",
     marginTop: 80,
+    // backgroundColor: "blue",
   },
   inputContainer: {
     marginTop: 30,
+    width: "90%",
   },
   buttonContainer: {
     flexDirection: "row",
   },
   loginHeader: {
     fontSize: 32,
+    textAlign: "left",
   },
   loginInput: {
     borderWidth: 1,
@@ -28,10 +35,10 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     borderRadius: 4,
     padding: 5,
-    borderColor: "#D3D3D3",
+    borderColor: "#B0B0B0",
   },
   button: {
-    textAlign: "center",
+    //textAlign: "center",
     borderRadius: 20,
     padding: 8,
     width: 100,
@@ -44,21 +51,17 @@ const styles = StyleSheet.create({
     fontWeight: "900",
   },
   buttonText: {
-    fontSize: 16,
+    textAlign: "center",
+    fontSize: 18,
     fontWeight: "bold",
     color: "#DFF3E4",
   },
-  flatList: {
-    flexDirection: "row",
-
-    height: 40,
-    width: 300,
+  register: {
+    marginTop: 12,
   },
-  editButton: {
-    backgroundColor: "red",
-  },
-  editText: {
-    fontSize: 16,
+  registerText: {
+    color: "#008DD5",
+    fontSize: 18,
   },
 });
 

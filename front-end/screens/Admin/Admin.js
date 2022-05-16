@@ -7,6 +7,7 @@ import {
   Pressable,
   Platform,
   FlatList,
+  ScrollView,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -36,30 +37,6 @@ const Admin = (props) => {
     //return token;
   };
 
-  const addPost = async () => {
-    const token = await loadToken();
-    const config = {
-      headers: { "x-auth-token": token },
-    };
-    axios
-      .post(
-        `http://${UrlString}:5054/blog/new`,
-        {
-          subject: subject,
-          text: text,
-          authorId: props.userData.id,
-        },
-        config
-      )
-      .then(function (res) {
-        props.setBlogData(res.data); //blogs
-        props.navigation.navigate("Profile");
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
-  };
-
   const getPost = async () => {
     const token = await loadToken();
     const config = {
@@ -80,65 +57,95 @@ const Admin = (props) => {
     );
   };
 
+  const addPost = async () => {
+    const token = await loadToken();
+    const config = {
+      headers: { "x-auth-token": token },
+    };
+    axios
+      .post(
+        `http://${UrlString}:5054/blog/new`,
+        {
+          subject: subject,
+          text: text,
+          authorId: props.userData.id,
+        },
+        config
+      )
+      .then(function (res) {
+        //props.setBlogData(res.data); //blogs
+        //props.navigation.navigate("Profile");
+        getPost();
+        setSubject("");
+        setText("");
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     if (!props.userData.id) {
       props.navigation.navigate("Login");
     }
-  }, []);
+  }, [props.userData]);
 
   useEffect(() => {
     getPost();
-  }, []);
+  }, [props.blogData]);
+  //[props.blogData]
 
-  console.log(props.blogData);
   return (
-    <View style={styles.container}>
-      <View style={styles.center}>
-        <Text>Welcome {props.userData.userName}🤠</Text>
-        <TouchableOpacity
-          style={styles.editButton}
-          onPress={() => {
-            props.navigation.navigate("Profile");
-          }}
-        >
-          <Text>Profile</Text>
-        </TouchableOpacity>
-        <Pressable style={styles.container} onPress={() => setPosted(true)}>
-          <Text>Create Blog</Text>
-        </Pressable>
-        <TouchableOpacity>
-          <Text>Subject</Text>
-          <TextInput
-            placeholder="type your title here"
-            value={subject}
-            onChangeText={setSubject}
-          />
-          <Text>Body</Text>
-          <TextInput
-            placeholder="type your message here"
-            value={text}
-            onChangeText={setText}
-          />
-        </TouchableOpacity>
-        <Text>{setSubject}</Text>
-        <TouchableOpacity onPress={() => addPost()}>
-          <Text>Post</Text>
-        </TouchableOpacity>
-        <View style={styles.blogContainer}>
-          <FlatList
-            data={props.blogData}
-            style={styles.flatlist}
-            renderItem={({ item, index }) => (
-              <View style={styles.flatlistContainer}>
-                <Text style={styles.blogTitle}>{item.subject}</Text>
-                <Text style={styles.blogText}>{item.text}</Text>
-              </View>
-            )}
-            keyExtractor={(item) => item._id}
-          />
+    <ScrollView>
+      <View style={styles.container}>
+        <View style={styles.center}>
+          <Text>Welcome {props.userData.userName}🤠</Text>
+          <TouchableOpacity
+            style={styles.editButton}
+            onPress={() => {
+              props.navigation.navigate("Profile");
+            }}
+          >
+            <Text>Profile</Text>
+          </TouchableOpacity>
+          <Pressable style={styles.container} onPress={() => setPosted(true)}>
+            <Text>Create Blog</Text>
+          </Pressable>
+          <TouchableOpacity>
+            <Text>Subject</Text>
+            <TextInput
+              placeholder="type your title here"
+              value={subject}
+              onChangeText={setSubject}
+            />
+            <Text>Body</Text>
+            <TextInput
+              placeholder="type your message here"
+              value={text}
+              onChangeText={setText}
+            />
+          </TouchableOpacity>
+          <Text>{setSubject}</Text>
+          <TouchableOpacity onPress={() => addPost()}>
+            <Text>Post</Text>
+          </TouchableOpacity>
+          <View style={styles.blogContainer}>
+            <FlatList
+              data={props.blogData}
+              style={styles.flatlist}
+              renderItem={({ item, index }) => (
+                <View style={styles.flatlistContainer} key={index}>
+                  <Text style={styles.blogTitle}>{item.subject}</Text>
+                  <Text style={styles.blogText}>{item.text}</Text>
+                </View>
+              )}
+              keyExtractor={(item) => item._id}
+              //keyExtractor={(index) => index.toString()}
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

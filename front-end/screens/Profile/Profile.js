@@ -74,7 +74,7 @@ const Profile = (props) => {
         console.log(err);
       });
   };
-  /*
+  
   const signOut = async () => {
     props.setUserData({});
     props.setToken("");
@@ -82,12 +82,12 @@ const Profile = (props) => {
     try {
       await AsyncStorage.clear();
       props.setUserData({});
-      props.navigation.navigate("Login");
-    } catch (e) {
-      console.log(e);
+      // props.navigation.navigate("Login");
+    } catch (err) {
+      console.log(err);
     }
   };
-*/
+
   return (
     <View style={styles.container}>
       <View style={styles.content}>

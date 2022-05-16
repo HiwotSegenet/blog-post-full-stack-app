@@ -3,7 +3,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Modal,
+ 
   Pressable,
   Platform,
   FlatList,

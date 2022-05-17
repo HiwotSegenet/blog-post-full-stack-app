@@ -112,53 +112,50 @@ const Profile = (props) => {
   };
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Pressable
-          style={styles.backButton}
-          onPress={() => props.navigation.navigate("Admin")}
-        >
-          <Ionicons name="md-chevron-back" size={40} color="#f6f9ff" />
-        </Pressable>
+    <View style={styles.container}>
+      <Pressable
+        style={styles.backButton}
+        onPress={() => props.navigation.navigate("Admin")}
+      >
+        <Ionicons name="md-chevron-back" size={40} color="#f6f9ff" />
+      </Pressable>
 
-        <View style={styles.content}>
-          <Text>Hi {props.userData.userName}</Text>
-          <TouchableOpacity onPress={() => signOut()}>
-            <Text>Sign out</Text>
-          </TouchableOpacity>
-          <View style={styles.blogContainer}>
-            <FlatList
-              data={userBlogs}
-              style={styles.flatlist}
-              renderItem={({ item }) => (
-                <View style={styles.flatlistContainer}>
-                  <Text style={styles.blogTitle}>{item.subject}</Text>
-                  <Text style={styles.blogText}>{item.text}</Text>
+      <View style={styles.content}>
+        <Text>Hi {props.userData.userName}</Text>
+        <TouchableOpacity onPress={() => signOut()}>
+          <Text>Sign out</Text>
+        </TouchableOpacity>
 
-                  <TouchableOpacity>
-                    <Text
-                      onPress={() => {
-                        props.navigation.navigate("Edit", {
-                          item: item,
-                          //item: item._id,
-                        });
-                      }}
-                    >
-                      Edit
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => deletePost(item._id)}>
-                    <Text>Trash 🗑️</Text>
-                  </TouchableOpacity>
-                </View>
-              )}
-              //keyExtractor={(item) => item._id}
-              keyExtractor={(item, index) => index.toString()}
-            />
-          </View>
-        </View>
+        <FlatList
+          data={userBlogs}
+          style={styles.flatlist}
+          renderItem={({ item }) => (
+            <View style={styles.flatlistContainer}>
+              <Text style={styles.blogTitle}>{item.subject}</Text>
+              <Text style={styles.blogText}>{item.text}</Text>
+
+              <TouchableOpacity>
+                <Text
+                  onPress={() => {
+                    props.navigation.navigate("Edit", {
+                      item: item,
+                      //item: item._id,
+                    });
+                  }}
+                >
+                  Edit
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => deletePost(item._id)}>
+                <Text>Trash 🗑️</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          //keyExtractor={(item) => item._id}
+          keyExtractor={(item, index) => index.toString()}
+        />
       </View>
-    </ScrollView>
+    </View>
   );
 };
 

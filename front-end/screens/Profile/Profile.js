@@ -15,7 +15,6 @@ import axios from "axios";
 import { Ionicons } from "@expo/vector-icons";
 import Blog from "../../components/Blog";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
 import styles from "./styles";
 
 const Profile = (props) => {
@@ -105,8 +104,8 @@ const Profile = (props) => {
       await AsyncStorage.clear();
       props.setUserData({});
       // props.navigation.navigate("Login");
-    } catch (err) {
-      console.log(err);
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -125,6 +124,7 @@ const Profile = (props) => {
           <TouchableOpacity onPress={() => signOut()}>
             <Text>Sign out</Text>
           </TouchableOpacity>
+
           <View style={styles.blogContainer}>
             <FlatList
               data={userBlogs}

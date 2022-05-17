@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
-
 import axios from "axios";
 
 const Register = (props) => {
@@ -47,6 +46,7 @@ const Register = (props) => {
           style={styles.input}
           placeholder="userName"
           onChangeText={setUserName}
+          placeholder="user name"
           value={userName}
         ></TextInput>
         <Text style={styles.loginText}>Your Email</Text>
@@ -54,12 +54,14 @@ const Register = (props) => {
           style={styles.input}
           placeholder="Email"
           onChangeText={setEmail}
+          placeholder="email"
           value={email}
         ></TextInput>
         <Text style={styles.loginText}>Your Password</Text>
         <TextInput
           style={styles.input}
           onChangeText={setPassword}
+          placeholder="********"
           value={password}
           secureTextEntry={true}
           placeholder="********"

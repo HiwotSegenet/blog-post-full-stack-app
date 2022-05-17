@@ -128,20 +128,18 @@ const Admin = (props) => {
           <Text>Post</Text>
         </TouchableOpacity>
 
-        <View style={styles.blogContainer}>
-          <FlatList
-            data={props.blogData}
-            style={styles.flatlist}
-            renderItem={({ item, index }) => (
-              <View style={styles.flatlistContainer} key={index}>
-                <Text style={styles.blogTitle}>{item.subject}</Text>
-                <Text style={styles.blogText}>{item.text}</Text>
-              </View>
-            )}
-            keyExtractor={(item) => item._id}
-            //keyExtractor={(index) => index.toString()}
-          />
-        </View>
+        <FlatList
+          data={props.blogData}
+          style={styles.flatlist}
+          renderItem={({ item, index }) => (
+            <View style={styles.flatlistContainer} key={index}>
+              <Text style={styles.blogTitle}>{item.subject}</Text>
+              <Text style={styles.blogText}>{item.text}</Text>
+            </View>
+          )}
+          keyExtractor={(item) => item._id}
+          //keyExtractor={(index) => index.toString()}
+        />
       </View>
     </View>
   );

@@ -79,18 +79,18 @@ export default function App() {
             ></Profile>
           )}
         </Stack.Screen>
-        <Stack.Screen name="Edit" options={{ headerShown: false }}>
-          {(props) => (
-            <Edit
-              setUserData={setUserData}
-              userData={userData}
-              setBlogData={setBlogData}
-              blogData={blogData}
-              {...props}
-            ></Edit>
-          )}
-        </Stack.Screen>
       </Tab.Navigator>
+      <Stack.Screen name="Edit" options={{ headerShown: false }}>
+        {(props) => (
+          <Edit
+            setUserData={setUserData}
+            userData={userData}
+            setBlogData={setBlogData}
+            blogData={blogData}
+            {...props}
+          ></Edit>
+        )}
+      </Stack.Screen>
     </NavigationContainer>
   );
 }

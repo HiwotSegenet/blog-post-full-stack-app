@@ -46,7 +46,7 @@ const Register = (props) => {
           style={styles.input}
           placeholder="userName"
           onChangeText={setUserName}
-          placeholder="user name"
+         
           value={userName}
         ></TextInput>
         <Text style={styles.loginText}>Your Email</Text>
@@ -54,7 +54,7 @@ const Register = (props) => {
           style={styles.input}
           placeholder="Email"
           onChangeText={setEmail}
-          placeholder="email"
+         
           value={email}
         ></TextInput>
         <Text style={styles.loginText}>Your Password</Text>
@@ -64,7 +64,7 @@ const Register = (props) => {
           placeholder="********"
           value={password}
           secureTextEntry={true}
-          placeholder="********"
+          
         ></TextInput>
       </View>
 

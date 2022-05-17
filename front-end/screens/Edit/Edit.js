@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 import styles from "./styles";
@@ -66,8 +66,8 @@ const Edit = (props) => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          //onPress={() => updatePost(item._id, item.subject, item.text)}
-          onPress={() => updatePost(props.blogData.indexOf(item))}
+          onPress={() => updatePost(item._id, item.subject, item.text)}
+          // onPress={() => updatePost(props.blogData.indexOf(item))}
         >
           <Text>Publish</Text>
         </TouchableOpacity>

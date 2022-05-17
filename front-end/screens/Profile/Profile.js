@@ -111,7 +111,7 @@ const Profile = (props) => {
   };
 
   return (
-    <ScrollView>
+    
       <View style={styles.container}>
         <Pressable
           style={styles.backButton}
@@ -157,7 +157,7 @@ const Profile = (props) => {
           </View>
         </View>
       </View>
-    </ScrollView>
+   
   );
 };
 

@@ -68,7 +68,7 @@ const Admin = (props) => {
         {
           subject: subject,
           text: text,
-          authorId: props.userData.id,
+          userId: props.userData.id,
         },
         config
       )
@@ -92,11 +92,11 @@ const Admin = (props) => {
 
   useEffect(() => {
     getPost();
-  }, [props.blogData]);
+  }, []);
   //[props.blogData]
 
   return (
-    <ScrollView>
+   
       <View style={styles.container}>
         <View style={styles.center}>
           <Text>Welcome {props.userData.userName}🤠</Text>
@@ -129,6 +129,7 @@ const Admin = (props) => {
           <TouchableOpacity onPress={() => addPost()}>
             <Text>Post</Text>
           </TouchableOpacity>
+          
           <View style={styles.blogContainer}>
             <FlatList
               data={props.blogData}
@@ -143,9 +144,10 @@ const Admin = (props) => {
               //keyExtractor={(index) => index.toString()}
             />
           </View>
+         
         </View>
       </View>
-    </ScrollView>
+   
   );
 };
 

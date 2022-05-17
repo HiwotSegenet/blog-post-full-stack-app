@@ -79,7 +79,7 @@ export default function App() {
             ></Profile>
           )}
         </Stack.Screen>
-      </Tab.Navigator>
+      
       <Stack.Screen name="Edit" options={{ headerShown: false }}>
         {(props) => (
           <Edit
@@ -91,6 +91,7 @@ export default function App() {
           ></Edit>
         )}
       </Stack.Screen>
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }

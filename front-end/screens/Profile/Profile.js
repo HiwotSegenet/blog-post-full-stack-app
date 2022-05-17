@@ -125,6 +125,7 @@ const Profile = (props) => {
           <TouchableOpacity onPress={() => signOut()}>
             <Text>Sign out</Text>
           </TouchableOpacity>
+
           <View style={styles.blogContainer}>
             <FlatList
               data={userBlogs}

@@ -45,18 +45,21 @@ const Register = (props) => {
         <TextInput
           style={styles.input}
           onChangeText={setUserName}
+          placeholder="user name"
           value={userName}
         ></TextInput>
         <Text style={styles.loginText}>Your Email</Text>
         <TextInput
           style={styles.input}
           onChangeText={setEmail}
+          placeholder="email"
           value={email}
         ></TextInput>
         <Text style={styles.loginText}>Your Password</Text>
         <TextInput
           style={styles.input}
           onChangeText={setPassword}
+          placeholder="********"
           value={password}
         ></TextInput>
       </View>

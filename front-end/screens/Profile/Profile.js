@@ -8,9 +8,11 @@ import {
   Platform,
   FlatList,
   StyleSheet,
+  ScrollView,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Ionicons } from "@expo/vector-icons";
 import Blog from "../../components/Blog";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -18,11 +20,6 @@ import styles from "./styles";
 
 const Profile = (props) => {
   const [userBlogs, setUserBlogs] = useState();
-
-  const [updateBlog, setUpdateBlog] = useState("");
-  const [deleteBlog, setDeleteBlog] = useState("");
-
-  const [toggleEdit, setToggleEdit] = useState(false);
 
   let UrlString = "localhost";
 
@@ -34,7 +31,8 @@ const Profile = (props) => {
     if (!props.userData.id) {
       props.navigation.navigate("Login");
     }
-    console.log(userBlogs);
+    //console.log(userBlogs);
+    //console.log(props.userData);
   }, []);
 
   const loadToken = async () => {
@@ -46,6 +44,26 @@ const Profile = (props) => {
     }
   };
 
+  const getPost = async () => {
+    const token = await loadToken();
+    const config = {
+      headers: { "x-auth-token": token },
+    };
+    return (
+      axios
+        .get(`http://${UrlString}:5054/blog`, config)
+        // {
+        //   authorId: props.userData.id,
+        // }
+        .then(function (response) {
+          setUserBlogs(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+    );
+  };
+
   // This gets the blogs made by this user
   useEffect(async () => {
     const token = await loadToken();
@@ -55,15 +73,12 @@ const Profile = (props) => {
     return axios
       .get(`http://${UrlString}:5054/blog`, config)
       .then(function (response) {
-        //console.log(response.data);
         setUserBlogs(response.data);
       })
       .catch(function (error) {
-        // console.log(error);
+        console.log(error);
       });
-  }, []);
-
-  console.log(userBlogs);
+  }, [userBlogs]);
 
   const deletePost = async (id) => {
     await axios
@@ -74,7 +89,8 @@ const Profile = (props) => {
         console.log("This is res data ===>", res.data);
       })
       .then(() => {
-        console.log("Blog post dsseleted.");
+        console.log("Blog post deleted.");
+        getPost();
         //props.navigation.navigate("Profile");
       })
       .catch(function (err) {
@@ -82,56 +98,68 @@ const Profile = (props) => {
       });
   };
 
-  //console.log(props.blogData);
+  const signOut = async () => {
+    /*props.setUserData({});
+    props.setToken("");
+    props.navigation.navigate("Login");*/
+    try {
+      await AsyncStorage.clear();
+      props.setUserData({});
+      props.navigation.navigate("Login");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.content}>
-        <Text>Hi {props.userData.userName}</Text>
-        <View style={styles.blogContainer}>
-          <FlatList
-            data={userBlogs}
-            style={styles.flatlist}
-            // keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item, index }) => (
-              <View style={styles.flatlistContainer} key={index}>
-                <Text style={styles.blogTitle}>{item.subject}</Text>
-                <Text style={styles.blogText}>{item.text}</Text>
-                <Text style={styles.blogText}>{item._id}</Text>
-                <TouchableOpacity>
-                  <Text
-                    onPress={() => {
-                      props.navigation.navigate("Edit", {
-                        item: item,
-                      });
-                    }}
-                  >
-                    Edit
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => deletePost(item._id)}>
-                  <Text>Delete Blog 🗑️</Text>
-                </TouchableOpacity>
-              </View>
-            )}
-            //keyExtractor={(item) => item._id} // <--- Returns obj
-            keyExtractor={(item, index) => index.toString()} // <--- Returns Array
-          />
+    
+      <View style={styles.container}>
+        <Pressable
+          style={styles.backButton}
+          onPress={() => props.navigation.navigate("Admin")}
+        >
+          <Ionicons name="md-chevron-back" size={40} color="#f6f9ff" />
+        </Pressable>
+
+        <View style={styles.content}>
+          <Text>Hi {props.userData.userName}</Text>
+          <TouchableOpacity onPress={() => signOut()}>
+            <Text>Sign out</Text>
+          </TouchableOpacity>
+         
+            <FlatList
+              data={userBlogs}
+              style={styles.flatlist}
+              renderItem={({ item }) => (
+                <View style={styles.flatlistContainer}>
+                  <Text style={styles.blogTitle}>{item.subject}</Text>
+                  <Text style={styles.blogText}>{item.text}</Text>
+
+                  <TouchableOpacity>
+                    <Text
+                      onPress={() => {
+                        props.navigation.navigate("Edit", {
+                          item: item,
+                          //item: item._id,
+                        });
+                      }}
+                    >
+                      Edit
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => deletePost(item._id)}>
+                    <Text>Trash 🗑️</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+              //keyExtractor={(item) => item._id}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          
         </View>
       </View>
-    </View>
+    
   );
 };
 
 export default Profile;
-
-/**
- * <Blog
-            item={item}
-            index={index}
-            userId={props.userData.id}
-            // id={item._id}
-            // subject={item.subject}
-            // text={item.text}
-            // authorId={item.authorId}
-          />
- */

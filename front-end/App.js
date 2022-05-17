@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
+
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Login from "./screens/Login/Login";
@@ -7,17 +9,19 @@ import Admin from "./screens/Admin/Admin";
 import Register from "./screens/Register/Register";
 import Profile from "./screens/Profile/Profile";
 import Edit from "./screens/Edit/Edit";
-
+import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 import { Platform } from "react-native";
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   const [userData, setUserData] = useState({});
-  const [blogData, setBlogData] = useState({});
+  const [blogData, setBlogData] = useState([]);
+  //const [token, setToken] = useState("");
 
   useEffect(() => {
     let UrlString = "localhost";
@@ -27,28 +31,30 @@ export default function App() {
     }
 
     AsyncStorage.getItem("token")
-      .then((tokenRes) =>
+      .then((tokenRes) => {
+        //setToken(tokenRes);
         axios.get(`http://${UrlString}:5054/user`, {
           headers: { "x-auth-token": tokenRes },
-        })
-      )
+        });
+      })
       .then((userResponse) => setUserData(userResponse.data))
       .catch((err) => console.log(err));
   }, []);
 
-  //console.log(userToken);
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" options={{ headerShown: false }}>
+      <Tab.Navigator initialRouteName="Login">
+        <Tab.Screen name="Login" options={{ headerShown: false }}>
           {(props) => (
             <Login
               userData={userData}
               setUserData={setUserData}
+              //token={token}
+              //setToken={setToken}
               {...props}
             ></Login>
           )}
-        </Stack.Screen>
+        </Tab.Screen>
         <Stack.Screen name="Register" options={{ headerShown: false }}>
           {(props) => <Register {...props}></Register>}
         </Stack.Screen>
@@ -70,10 +76,12 @@ export default function App() {
               userData={userData}
               setBlogData={setBlogData}
               blogData={blogData}
+              //token={token}
+              //setToken={setToken}
               {...props}
             ></Profile>
           )}
-        </Stack.Screen>
+        </Stack.Screen> 
         <Stack.Screen name="Edit" options={{ headerShown: false }}>
           {(props) => (
             <Edit
@@ -85,7 +93,9 @@ export default function App() {
             ></Edit>
           )}
         </Stack.Screen>
-      </Stack.Navigator>
+        </Tab.Navigator>
+       
+      
     </NavigationContainer>
   );
 }

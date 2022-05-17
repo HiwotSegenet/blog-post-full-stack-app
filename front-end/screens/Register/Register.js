@@ -1,14 +1,8 @@
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Platform,
-} from "react-native";
+import { View, Text, TextInput, Pressable, Platform } from "react-native";
 import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import styles from "./styles";
-
+import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
 
 const Register = (props) => {
@@ -38,39 +32,41 @@ const Register = (props) => {
   };
   return (
     <View style={styles.container}>
-      <View style={styles.center}>
-        <Text>Register Page</Text>
+      <Pressable
+        style={styles.backButton}
+        onPress={() => props.navigation.goBack()}
+      >
+        <Ionicons name="md-chevron-back" size={40} color="#f6f9ff" />
+      </Pressable>
+
+      <View style={styles.loginContainer}>
+        <Text style={styles.header}>Sign Up</Text>
+        <Text style={styles.loginText}>Your Username</Text>
         <TextInput
-          style={{
-            borderWidth: 1,
-            fontSize: 18,
-          }}
-          onChangeText={setEmail}
-          value={email}
-          placeholder="Email"
-        />
-        <TextInput
-          style={{
-            borderWidth: 1,
-            fontSize: 18,
-          }}
+          style={styles.input}
           onChangeText={setUserName}
+          placeholder="user name"
           value={userName}
-          placeholder="Username"
-        />
+        ></TextInput>
+        <Text style={styles.loginText}>Your Email</Text>
         <TextInput
-          style={{
-            borderWidth: 1,
-            fontSize: 18,
-          }}
+          style={styles.input}
+          onChangeText={setEmail}
+          placeholder="email"
+          value={email}
+        ></TextInput>
+        <Text style={styles.loginText}>Your Password</Text>
+        <TextInput
+          style={styles.input}
           onChangeText={setPassword}
+          placeholder="********"
           value={password}
-          placeholder="Password"
-        />
-        <TouchableOpacity>
-          <Text onPress={register}>Register</Text>
-        </TouchableOpacity>
+        ></TextInput>
       </View>
+
+      <Pressable style={styles.loginButton} onPress={() => register()}>
+        <Text style={styles.loginButtonText}>SIGN UP</Text>
+      </Pressable>
     </View>
   );
 };

@@ -21,7 +21,7 @@ const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   //const [isLogin, setIsLogin] = useState(false);
-  console.log(props.userData);
+  //console.log(props.userData);
   //console.log(props.token);
 
   useEffect(() => {
@@ -101,10 +101,3 @@ const Login = (props) => {
 };
 
 export default Login;
-/**
- * <ImageBackground
-      source={require(backgroundImg)}
-      resizeMode="cover"
-      style={styles.background}
-    >
- */

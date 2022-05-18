@@ -8,7 +8,8 @@ import {
   Platform,
   FlatList,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -45,19 +46,15 @@ const Admin = (props) => {
     const config = {
       headers: { "x-auth-token": token },
     };
-    return (
-      axios
-        .get(`http://${UrlString}:5054/blog/all`, config)
-        // {
-        //   authorId: props.userData.id,
-        // }
-        .then(function (response) {
-          props.setBlogData(response.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        })
-    );
+    return axios
+      .get(`http://${UrlString}:5054/blog/all`, config)
+      .then(function (response) {
+        console.log("this is blog data ===>", response.data);
+        props.setBlogData(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   const addPost = async () => {
@@ -94,10 +91,11 @@ const Admin = (props) => {
     }
   }, [props.userData]);
 
-  useEffect(() => {
-    getPost();
-  }, []);
-  //[props.blogData]
+  useFocusEffect(
+    useCallback(() => {
+      getPost();
+    }, [])
+  );
 
   return (
     <View style={styles.container}>

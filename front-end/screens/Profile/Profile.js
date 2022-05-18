@@ -31,8 +31,6 @@ const Profile = (props) => {
     if (!props.userData.id) {
       props.navigation.navigate("Login");
     }
-    //console.log(userBlogs);
-    //console.log(props.userData);
   }, []);
 
   const loadToken = async () => {
@@ -129,7 +127,7 @@ const Profile = (props) => {
         <FlatList
           data={userBlogs}
           style={styles.flatlist}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <View style={styles.flatlistContainer}>
               <Text style={styles.blogTitle}>{item.subject}</Text>
               <Text style={styles.blogText}>{item.text}</Text>
@@ -139,6 +137,7 @@ const Profile = (props) => {
                   onPress={() => {
                     props.navigation.navigate("Edit", {
                       item: item,
+                      index: index,
                       //item: item._id,
                     });
                   }}

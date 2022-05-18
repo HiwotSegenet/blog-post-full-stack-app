@@ -91,6 +91,7 @@ const Admin = (props) => {
     }
   }, [props.userData]);
 
+  // we were using a useEffect here
   useFocusEffect(
     useCallback(() => {
       getPost();

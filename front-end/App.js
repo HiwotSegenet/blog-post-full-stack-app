@@ -7,7 +7,7 @@ import Admin from "./screens/Admin/Admin";
 import Register from "./screens/Register/Register";
 import Profile from "./screens/Profile/Profile";
 import Edit from "./screens/Edit/Edit";
-
+import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { Platform } from "react-native";
@@ -19,7 +19,6 @@ export default function App() {
   const [userData, setUserData] = useState({});
   const [blogData, setBlogData] = useState([]);
 
-
   useEffect(() => {
     let UrlString = "localhost";
 
@@ -29,7 +28,6 @@ export default function App() {
 
     AsyncStorage.getItem("token")
       .then((tokenRes) => {
-       
         axios.get(`http://${UrlString}:5054/user`, {
           headers: { "x-auth-token": tokenRes },
         });
@@ -75,7 +73,7 @@ export default function App() {
             ></Profile>
           )}
         </Stack.Screen>
-      
+
       <Stack.Screen name="Edit" options={{ headerShown: false }}>
         {(props) => (
           <Edit

@@ -108,7 +108,6 @@ const Profile = (props) => {
   };
 
   return (
-    
     <View style={styles.container}>
       <Pressable
         style={styles.backButton}
@@ -130,7 +129,6 @@ const Profile = (props) => {
             <View style={styles.flatlistContainer}>
               <Text style={styles.blogTitle}>{item.subject}</Text>
               <Text style={styles.blogText}>{item.text}</Text>
-
               <TouchableOpacity>
                 <Text
                   onPress={() => {
@@ -160,15 +158,3 @@ const Profile = (props) => {
 
 export default Profile;
 
-/**
- * 
- * <Blog
-            item={item}
-            index={index}
-            userId={props.userData.id}
-            // id={item._id}
-            // subject={item.subject}
-            // text={item.text}
-            // authorId={item.authorId}
-          />
-*/

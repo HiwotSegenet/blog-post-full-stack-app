@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#374151",
   },
+
   blogText: {
     fontSize: 18,
     color: "#452e4f",

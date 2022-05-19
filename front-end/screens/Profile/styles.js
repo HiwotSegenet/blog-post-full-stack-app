@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
   flatlistContainer: {
     flexDirection: "column",
     backgroundColor: "#eaeaea",
-    height: 120,
     width: 300,
     margin: 10,
     marginBottom: 40,

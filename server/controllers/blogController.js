@@ -5,7 +5,7 @@ module.exports = {
     try {
       // get all user blogs by the user.id
       // from the auth middleware
-      const allUserPosts = await Blog.find({ authorId: req.user.id });
+      const allUserPosts = await Blog.find({ userId: req.user.id });
       // send all user blog entries as json
       res.json(allUserPosts);
     } catch (err) {
@@ -36,7 +36,7 @@ module.exports = {
       const newPost = await new Blog({
         subject,
         text,
-        authorId: req.user.id,
+        userId: req.user.id,
       }).save();
 
       // on success send new blog back as json
@@ -61,7 +61,7 @@ module.exports = {
 
   deleteBlogPost: async (req, res) => {
     try {
-      const deleteBlog = await Blog.findByIdAndDelete(req.body.id);
+      const deleteBlog = await Blog.findByIdAndDelete(req.body._id);
       if (deleteBlog !== null) return res.json({ msg: "success" });
       res.json({ msg: "wrong id sent" });
     } catch (err) {
@@ -69,4 +69,3 @@ module.exports = {
     }
   },
 };
-//Hello from fresno

@@ -14,9 +14,6 @@ import styles from "./styles";
 
 import { AntDesign } from "@expo/vector-icons";
 
-const backgroundImg =
-  "/home/william/Desktop/blog-post-fullstack-app/blog-post-full-stack-app/front-end/assets/appbg.jpg";
-
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -101,3 +98,10 @@ const Login = (props) => {
 };
 
 export default Login;
+/**
+ * <ImageBackground
+      source={require(backgroundImg)}
+      resizeMode="cover"
+      style={styles.background}
+    >
+ */

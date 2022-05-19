@@ -18,7 +18,6 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   const [userData, setUserData] = useState({});
   const [blogData, setBlogData] = useState([]);
-  //const [token, setToken] = useState("");
 
   useEffect(() => {
     let UrlString = "localhost";
@@ -75,17 +74,17 @@ export default function App() {
           )}
         </Stack.Screen>
 
-        <Stack.Screen name="Edit" options={{ headerShown: false }}>
-          {(props) => (
-            <Edit
-              setUserData={setUserData}
-              userData={userData}
-              setBlogData={setBlogData}
-              blogData={blogData}
-              {...props}
-            ></Edit>
-          )}
-        </Stack.Screen>
+      <Stack.Screen name="Edit" options={{ headerShown: false }}>
+        {(props) => (
+          <Edit
+            setUserData={setUserData}
+            userData={userData}
+            setBlogData={setBlogData}
+            blogData={blogData}
+            {...props}
+          ></Edit>
+        )}
+      </Stack.Screen>
       </Tab.Navigator>
     </NavigationContainer>
   );

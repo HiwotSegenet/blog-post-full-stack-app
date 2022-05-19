@@ -67,31 +67,33 @@ const Login = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>Hawsa Blog!</Text>
+        {/* <Text style={styles.headerText}>Hawsa Blog your first choice!</Text> */}
       </View>
       <View style={styles.loginContainer}>
-        <Text style={styles.loginHeader}>Login</Text>
+        <Text style={styles.loginHeader}></Text>
         <View style={styles.inputContainer}>
-          <Text>Your Email</Text>
+          <Text style={{color:"#000",fontSize:20}}>Your Email</Text>
           <TextInput
             style={styles.loginInput}
             onChangeText={setEmail}
             value={email}
-            placeholder="Email"
+           
           />
-          <Text>Your Password</Text>
+          <Text style={{color:"#000",fontSize:20}}>Your Password</Text>
           <TextInput
             style={styles.loginInput}
             onChangeText={setPassword}
             value={password}
             placeholder="********"
+            placeholderTextColor='#000'
             secureTextEntry={true}
+           
           />
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={login}>
             <Text style={styles.buttonText}>
-              Login <AntDesign name="arrowright" size={18} color="#DFF3E4" />
+              Login <AntDesign name="arrowright" size={18} color="#fff" />
             </Text>
           </TouchableOpacity>
         </View>

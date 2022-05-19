@@ -2,8 +2,6 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#008DD5",
-    //backgroundColor: "#f5fcfe",
   },
   latestContainer: {
     marginLeft: 20,
@@ -26,7 +24,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: "bold",
     //color: "#452e4f",
-    color: "#f5fcfe",
+    color: "#000",
   },
   flatlist: {
     alignSelf: "center",
@@ -49,17 +47,17 @@ const styles = StyleSheet.create({
 
   /** Modal Button */
   buttonContainer: {
-    //flex: 1,
+   
     height: "11%",
     paddingVertical: 0,
-    //backgroundColor: "black",
+   
   },
   modalButton: {
     alignSelf: "flex-end",
     marginTop: 15,
     height: 80,
     marginRight: 25,
-    backgroundColor: "#008DD5",
+    
   },
   /*---- Modal Starts Here ----*/
   centeredView: {
@@ -92,7 +90,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F194FF",
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    // backgroundColor: "#2196F3",
   },
   textStyle: {
     color: "white",

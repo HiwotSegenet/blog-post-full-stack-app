@@ -4,16 +4,16 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "flex-start",
     justifyContent: "center",
-    backgroundColor: "#008DD5",
+    backgroundColor: "#3C2C32",
   },
   loginContainer: {
-    width: "100%",
-    paddingHorizontal: 22,
+    width: 360,
+    padding: 32,
   },
   header: {
     fontSize: 32,
     fontWeight: "bold",
-    color: "#DFF3E4",
+    color: "#000",
     marginBottom: 32,
   },
   input: {
@@ -31,32 +31,36 @@ const styles = StyleSheet.create({
     color: "#dae0e9",
   },
   loginText: {
-    fontSize: 16,
-    color: "#DFF3E4",
+    fontSize: 20,
+    color: "#000",
   },
   loginButton: {
-    alignSelf: "flex-end",
+   
     borderWidth: 1,
     borderRadius: 18,
     borderColor: "#4caad5",
     paddingVertical: 10,
     paddingHorizontal: "12.5%",
-    marginTop: 32,
+    marginTop: 20,
     marginBottom: 150,
     marginRight: 22,
-    backgroundColor: "#4caad5",
+    backgroundColor: "#EFD064",
+    width:300,
+    alignSelf: "center",
   },
   loginButtonText: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#DFF3E4",
+    color: "#fff",
+    alignSelf:'center'
   },
 
   backButton: {
-    backgroundColor: "#4caad5",
-    marginLeft: 22,
-    marginBottom: 120,
+    backgroundColor: "#EFD064",
+    marginLeft: 20,
+    marginBottom: 80,
     borderRadius: 50,
+    marginTop:90
   },
 });
 

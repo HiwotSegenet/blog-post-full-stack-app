@@ -82,6 +82,7 @@ export default function App() {
             ></Profile>
           )}
         </Stack.Screen> 
+        
         <Stack.Screen name="Edit" options={{ headerShown: false }}>
           {(props) => (
             <Edit

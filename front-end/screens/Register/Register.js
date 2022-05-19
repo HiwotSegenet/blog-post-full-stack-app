@@ -33,15 +33,16 @@ const Register = (props) => {
   };
   return (
     <View style={styles.container}>
+      <Text>Hawsa</Text>
       <Pressable
         style={styles.backButton}
         onPress={() => props.navigation.goBack()}
       >
-        <Ionicons name="md-chevron-back" size={40} color="#f6f9ff" />
+        <Ionicons name="md-chevron-back" size={40} color="#fff" />
       </Pressable>
 
       <View style={styles.loginContainer}>
-        <Text style={styles.header}>Sign Up</Text>
+        <Text style={styles.header}>Create account</Text>
         <Text style={styles.loginText}>Your Username</Text>
         <TextInput
           style={styles.input}

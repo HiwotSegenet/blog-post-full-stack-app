@@ -8,7 +8,8 @@ import {
   Platform,
   FlatList,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -94,9 +95,11 @@ const Admin = (props) => {
     }
   }, [props.userData]);
 
-  useEffect(() => {
-     getPost();
-   }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getPost();
+    }, [])
+  );
 //props.blogData  
 
   return (
@@ -134,7 +137,7 @@ const Admin = (props) => {
           onPress={() => setModalVisible(true)}
         >
           <Text style={styles.modalText}>
-            <AntDesign name="pluscircle" size={50} color="#DFF3E4" />
+            <AntDesign name="pluscircle" size={50} color="#EFD064" />
           </Text>
         </Pressable>
       </View>

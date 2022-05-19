@@ -48,12 +48,14 @@ const Register = (props) => {
           onChangeText={setUserName}
           value={userName}
         ></TextInput>
+
         <Text style={styles.loginText}>Your Email</Text>
         <TextInput
           style={styles.input}
           onChangeText={setEmail}
           value={email}
         ></TextInput>
+
         <Text style={styles.loginText}>Your Password</Text>
         <TextInput
           style={styles.input}

@@ -10,7 +10,7 @@ import axios from "axios";
 import styles from "./styles";
 
 const Edit = (props) => {
-  const { item } = props.route.params;
+  const { item, index } = props.route.params;
   const [subject, setSubject] = useState(item.subject);
   const [text, setText] = useState(item.text);
   let id = item._id;
@@ -21,22 +21,22 @@ const Edit = (props) => {
     UrlString = "10.0.2.2";
   }
 
-  console.log("this is our subject " + item.subject);
-  console.log("this is our text " + item.text);
-  console.log("this is our id " + item._id);
+  useEffect(() => {
+    console.log("this is our subject " + item.subject);
+    console.log("this is our text " + item.text);
+    console.log("this is our id " + item._id);
 
-  const updatePost = async () => {
+    console.log("this is the index of the item", index);
+  }, []);
+
+  const updatePost = async (index) => {
     await axios
       .put(`http://${UrlString}:5054/blog/update`, {
         _id: id,
         subject: subject,
         text: text,
       })
-      .then(function (res) {
-        console.log("This is res data ===>", res.data);
-      })
       .then(() => {
-        console.log("Blog post updated");
         setSubject("");
         setText("");
         props.navigation.navigate("Admin");

@@ -10,12 +10,12 @@ const styles = StyleSheet.create({
   headerContainer: {
     alignItems: "center",
     //marginTop: 200,
-    marginTop: "40%",
+    marginTop: "30%",
   },
   loginContainer: {
     alignContent: "center",
     alignItems: "center",
-    marginTop: 80,
+    marginTop: 40,
     // backgroundColor: "blue",
   },
   inputContainer: {

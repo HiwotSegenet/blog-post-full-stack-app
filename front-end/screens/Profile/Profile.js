@@ -15,7 +15,6 @@ import axios from "axios";
 import { Ionicons } from "@expo/vector-icons";
 import Blog from "../../components/Blog";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
 import styles from "./styles";
 
 const Profile = (props) => {
@@ -95,7 +94,6 @@ const Profile = (props) => {
         console.log(err);
       });
   };
-
   const signOut = async () => {
     /*props.setUserData({});
     props.setToken("");
@@ -103,13 +101,14 @@ const Profile = (props) => {
     try {
       await AsyncStorage.clear();
       props.setUserData({});
-      props.navigation.navigate("Login");
+      // props.navigation.navigate("Login");
     } catch (e) {
       console.log(e);
     }
   };
 
   return (
+    
     <View style={styles.container}>
       <Pressable
         style={styles.backButton}
@@ -155,6 +154,7 @@ const Profile = (props) => {
         />
       </View>
     </View>
+
   );
 };
 

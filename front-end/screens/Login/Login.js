@@ -14,8 +14,8 @@ import styles from "./styles";
 
 import { AntDesign } from "@expo/vector-icons";
 
-const backgroundImg =
-  "/home/william/Desktop/blog-post-fullstack-app/blog-post-full-stack-app/front-end/assets/appbg.jpg";
+// const backgroundImg =
+//   "/home/william/Desktop/blog-post-fullstack-app/blog-post-full-stack-app/front-end/assets/appbg.jpg";
 
 const Login = (props) => {
   const [email, setEmail] = useState("");

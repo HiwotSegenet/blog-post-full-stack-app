@@ -91,7 +91,7 @@ const Admin = (props) => {
     }
   }, [props.userData]);
 
-  // we were using a useEffect here
+// we were using a useEffect here
   useFocusEffect(
     useCallback(() => {
       getPost();
@@ -175,56 +175,3 @@ const Admin = (props) => {
 };
 
 export default Admin;
-
-/**
- * useEffect(
-    async () => {
-      const token = await loadToken();
-      const config = {
-        headers: { "x-auth-token": token },
-      };
-      return (
-        axios
-          .get(`http://${UrlString}:5054/blog/all`, config)
-          // {
-          //   authorId: props.userData.id,
-          // }
-          .then(function (res) {
-            // setToken(response);
-            //props.setBlogData([...props.blogData, res.data]);
-
-            console.log(res.data);
-          })
-          .catch(function (error) {
-            console.log(error);
-          })
-      );
-    },
-    [
-      
-    ]
-    );
-
-
-
-    ------ post -----
-
-     <TouchableOpacity>
-          <Text>Subject</Text>
-          <TextInput
-            placeholder="type your title here"
-            value={subject}
-            onChangeText={setSubject}
-          />
-          <Text>Body</Text>
-          <TextInput
-            placeholder="type your message here"
-            value={text}
-            onChangeText={setText}
-          />
-        </TouchableOpacity>
-        <Text>{setSubject}</Text>
-        <TouchableOpacity onPress={() => addPost()}>
-          <Text>Post</Text>
-        </TouchableOpacity>
- */

@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
   content: {
     alignContent: "center",
     alignItems: "center",
-    //justifyContent: "center",
     marginTop: 60,
   },
   flatlist: {

@@ -20,7 +20,6 @@ const backgroundImg =
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //const [isLogin, setIsLogin] = useState(false);
   //console.log(props.userData);
   //console.log(props.token);
 
@@ -46,7 +45,6 @@ const Login = (props) => {
       })
       .then(function (response) {
         // use async storage to set an item with the key token to the value of the token that was received
-
         props.setUserData(response.data.user);
         return AsyncStorage.setItem("token", response.data.token);
       })

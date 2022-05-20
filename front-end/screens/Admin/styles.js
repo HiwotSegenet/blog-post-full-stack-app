@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#008DD5",
+    backgroundColor: "#dfe4ea",
     //backgroundColor: "#f5fcfe",
   },
   latestContainer: {
@@ -10,9 +10,10 @@ const styles = StyleSheet.create({
   },
   flatlistContainer: {
     flexDirection: "column",
-    backgroundColor: "#eaeaea",
-    height: 80,
-    width: 300,
+    backgroundColor: "#f1f2f6",
+    borderRadius: 8,
+    height: 100,
+    width: "98%",
     margin: 10,
   },
 
@@ -26,11 +27,12 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: "bold",
     //color: "#452e4f",
-    color: "#f5fcfe",
+    color: "#000",
   },
   flatlist: {
     alignSelf: "center",
     marginVertical: 10,
+    width: "90%",
   },
 
   editButton: {
@@ -52,6 +54,10 @@ const styles = StyleSheet.create({
     //flex: 1,
     height: "11%",
     paddingVertical: 0,
+    position: "absolute",
+    bottom: 10,
+    right: 10,
+    height: 70,
     //backgroundColor: "black",
   },
   modalButton: {
@@ -59,20 +65,22 @@ const styles = StyleSheet.create({
     marginTop: 15,
     height: 80,
     marginRight: 25,
-    backgroundColor: "#008DD5",
+    backgroundColor: "rgba(52, 52, 52, 0)",
   },
   /*---- Modal Starts Here ----*/
   centeredView: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
+    marginTop: 0,
+    padding: 20,
+    backgroundColor: "rgba(52, 52, 52, 0.6)",
   },
   modalView: {
-    margin: 20,
+    //margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
+    padding: 25,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -82,26 +90,51 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    width: "99%",
+    height: "80%",
   },
-  button: {
+  publishButton: {
     borderRadius: 20,
-    padding: 10,
-    elevation: 2,
+    padding: 8,
+    width: 122,
+    marginTop: 20,
+    marginHorizontal: 10,
+    backgroundColor: "#008DD5",
+    flexDirection: "row",
+    justifyContent: "center",
   },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
+  publishText: {
+    textAlign: "center",
+    fontSize: 18,
+    color: "#DFF3E4",
+    marginRight: 5,
   },
-  buttonClose: {
-    backgroundColor: "#2196F3",
+  closeModal: {
+    alignSelf: "flex-end",
+    marginBottom: 20,
+    //marginLeft: 100,
   },
   textStyle: {
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
   },
+
+  blogContent: {
+    height: "80%",
+    width: "95%",
+  },
+  modalTitle: {
+    fontSize: 20,
+    marginBottom: 6,
+  },
   modalText: {
     marginBottom: 15,
     textAlign: "center",
+  },
+  modalTextInput: {
+    marginBottom: 20,
+    fontSize: 18,
   },
 });
 

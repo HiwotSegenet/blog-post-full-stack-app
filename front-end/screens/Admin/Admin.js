@@ -14,6 +14,7 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
 import styles from "./styles";
 
@@ -133,39 +134,57 @@ const Admin = (props) => {
           onPress={() => setModalVisible(true)}
         >
           <Text style={styles.modalText}>
-            <AntDesign name="pluscircle" size={50} color="#DFF3E4" />
+            <AntDesign name="pluscircle" size={50} color="#008DD5" />
           </Text>
         </Pressable>
       </View>
 
       <Modal
+        statusBarTranslucent={true}
         animationType="slide"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
           setModalVisible(!modalVisible);
         }}
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <TouchableOpacity>
-              <Text>Subject</Text>
+            <View style={styles.closeModal}>
+              <Pressable
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <Text>
+                  <AntDesign name="closecircleo" size={24} color="#e55039" />
+                </Text>
+              </Pressable>
+            </View>
+            <TouchableOpacity style={styles.blogContent}>
+              <Text style={styles.modalTitle}>Title</Text>
               <TextInput
-                placeholder="type your title here"
+                placeholder="Type your title here"
                 value={subject}
                 onChangeText={setSubject}
+                style={styles.modalTextInput}
               />
-              <Text>Body</Text>
+              <Text style={styles.modalTitle}>Body</Text>
               <TextInput
-                placeholder="type your message here"
+                placeholder="Tell your story..."
                 value={text}
                 onChangeText={setText}
+                multiline={true}
+                style={styles.modalTextInput}
               />
             </TouchableOpacity>
-            <Text>{setSubject}</Text>
-            <TouchableOpacity onPress={() => addPost()}>
-              <Text>Post</Text>
+
+            <TouchableOpacity
+              style={styles.publishButton}
+              onPress={() => addPost()}
+            >
+              <Text style={styles.publishText}>Publish</Text>
+              <FontAwesome name="pencil-square-o" size={24} color="#DFF3E4" />
             </TouchableOpacity>
           </View>
         </View>
@@ -175,56 +194,3 @@ const Admin = (props) => {
 };
 
 export default Admin;
-
-/**
- * useEffect(
-    async () => {
-      const token = await loadToken();
-      const config = {
-        headers: { "x-auth-token": token },
-      };
-      return (
-        axios
-          .get(`http://${UrlString}:5054/blog/all`, config)
-          // {
-          //   authorId: props.userData.id,
-          // }
-          .then(function (res) {
-            // setToken(response);
-            //props.setBlogData([...props.blogData, res.data]);
-
-            console.log(res.data);
-          })
-          .catch(function (error) {
-            console.log(error);
-          })
-      );
-    },
-    [
-      
-    ]
-    );
-
-
-
-    ------ post -----
-
-     <TouchableOpacity>
-          <Text>Subject</Text>
-          <TextInput
-            placeholder="type your title here"
-            value={subject}
-            onChangeText={setSubject}
-          />
-          <Text>Body</Text>
-          <TextInput
-            placeholder="type your message here"
-            value={text}
-            onChangeText={setText}
-          />
-        </TouchableOpacity>
-        <Text>{setSubject}</Text>
-        <TouchableOpacity onPress={() => addPost()}>
-          <Text>Post</Text>
-        </TouchableOpacity>
- */

@@ -1,14 +1,10 @@
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
-  Modal,
   Pressable,
   Platform,
   FlatList,
-  StyleSheet,
-  ScrollView,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";

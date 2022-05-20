@@ -1,6 +1,5 @@
 import { View, Text, TextInput, Pressable, Platform } from "react-native";
-import React, { useState, useEffect } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { useState } from "react";
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 

@@ -12,8 +12,8 @@ import styles from "./styles";
 
 const Edit = (props) => {
   const { item, index } = props.route.params;
-  const [subject, setSubject] = useState(item.subject);
-  const [text, setText] = useState(item.text);
+  const [subject, setSubject] = useState();
+  const [text, setText] = useState();
   let id = item._id;
 
   let UrlString = "localhost";
@@ -28,6 +28,9 @@ const Edit = (props) => {
     console.log("this is our id " + item._id);
 
     console.log("this is the index of the item", index);
+
+    setSubject(item.subject);
+    setText(item.text);
   }, []);
 
   const updatePost = async (index) => {
@@ -38,8 +41,8 @@ const Edit = (props) => {
         text: text,
       })
       .then(() => {
-        setSubject("");
-        setText("");
+        //setSubject("");
+        //setText("");
         props.navigation.navigate("Admin");
       })
       .catch(function (err) {

@@ -4,12 +4,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+import Home from "./screens/Home/Home";
 import Login from "./screens/Login/Login";
 import Admin from "./screens/Admin/Admin";
 import Register from "./screens/Register/Register";
 import Profile from "./screens/Profile/Profile";
 import Edit from "./screens/Edit/Edit";
-import { Ionicons } from "@expo/vector-icons";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
@@ -21,7 +22,6 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   const [userData, setUserData] = useState({});
   const [blogData, setBlogData] = useState([]);
-  //const [token, setToken] = useState("");
 
   useEffect(() => {
     let UrlString = "localhost";
@@ -32,7 +32,6 @@ export default function App() {
 
     AsyncStorage.getItem("token")
       .then((tokenRes) => {
-        //setToken(tokenRes);
         axios.get(`http://${UrlString}:5054/user`, {
           headers: { "x-auth-token": tokenRes },
         });
@@ -43,14 +42,21 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator initialRouteName="Login">
+      <Tab.Navigator initialRouteName="Home">
+        <Tab.Screen name="Home" options={{ headerShown: false }}>
+          {(props) => (
+            <Home
+              userData={userData}
+              setUserData={setUserData}
+              {...props}
+            ></Home>
+          )}
+        </Tab.Screen>
         <Tab.Screen name="Login" options={{ headerShown: false }}>
           {(props) => (
             <Login
               userData={userData}
               setUserData={setUserData}
-              //token={token}
-              //setToken={setToken}
               {...props}
             ></Login>
           )}
@@ -76,8 +82,6 @@ export default function App() {
               userData={userData}
               setBlogData={setBlogData}
               blogData={blogData}
-              //token={token}
-              //setToken={setToken}
               {...props}
             ></Profile>
           )}

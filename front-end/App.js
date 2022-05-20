@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -13,7 +12,6 @@ import Edit from "./screens/Edit/Edit";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-
 import { Platform } from "react-native";
 
 const Stack = createNativeStackNavigator();
@@ -86,6 +84,7 @@ export default function App() {
             ></Profile>
           )}
         </Stack.Screen>
+
         <Stack.Screen name="Edit" options={{ headerShown: false }}>
           {(props) => (
             <Edit

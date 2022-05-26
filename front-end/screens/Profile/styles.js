@@ -2,7 +2,14 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#008DD5",
+    backgroundColor: "#dfe4ea",
+    justifyContent: "center",
+  },
+  navContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 50,
+    marginBottom: 80,
   },
   content: {
     alignContent: "center",
@@ -10,16 +17,21 @@ const styles = StyleSheet.create({
     marginTop: 60,
   },
   flatlist: {
+    alignSelf: "center",
     marginVertical: 10,
-    padding: 20,
+    width: "90%",
   },
   flatlistContainer: {
     flexDirection: "column",
-    backgroundColor: "#eaeaea",
-    height: 100,
-    width: 300,
-    margin: 10,
-    marginBottom: 40,
+    backgroundColor: "#f1f2f6",
+    borderRadius: 8,
+    height: 120,
+    width: "100%",
+    marginVertical: 10,
+  },
+  blogOptions: {
+    alignSelf: "flex-end",
+    marginRight: 20,
   },
   editButton: {
     backgroundColor: "red",
@@ -28,20 +40,25 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   blogTitle: {
-    fontSize: 20,
-    color: "black",
+    marginLeft: 20,
+    marginBottom: 5,
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#374151",
   },
   blogText: {
-    fontSize: 16,
-    color: "black",
+    marginLeft: 20,
+    fontSize: 18,
+    color: "#452e4f",
   },
   backButton: {
     backgroundColor: "#4caad5",
     marginLeft: 22,
-    marginTop: 50,
-    marginBottom: 50,
     borderRadius: 50,
-    alignSelf: "flex-start",
+  },
+  signOutButton: {
+    //alignSelf: "flex-end",
+    marginRight: 22,
   },
 });
 export default styles;

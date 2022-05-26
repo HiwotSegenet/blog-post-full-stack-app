@@ -13,6 +13,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 
@@ -31,10 +32,31 @@ const Admin = (props) => {
     UrlString = "10.0.2.2";
   }
 
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const d = new Date();
+  let month = monthNames[d.getMonth()];
+  let day = d.getDate();
+  let year = d.getFullYear();
+
+  let datePosted = `${month} ${day}, ${year}`;
+
   const loadToken = async () => {
     try {
       const token = await AsyncStorage.getItem("token");
-      console.log(token);
       return token;
     } catch (error) {
       console.log("Load token error: ", error);
@@ -51,6 +73,7 @@ const Admin = (props) => {
       .get(`http://${UrlString}:5054/blog/all`, config)
       .then(function (response) {
         console.log("this is blog data ===>", response.data);
+        console.log("this is authorId data ====> ", props.userData.id);
         props.setBlogData(response.data);
       })
       .catch(function (error) {
@@ -70,6 +93,8 @@ const Admin = (props) => {
           subject: subject,
           text: text,
           authorId: props.userData.id,
+          userName: props.userData.userName,
+          date: datePosted,
         },
         config
       )
@@ -92,7 +117,7 @@ const Admin = (props) => {
     }
   }, [props.userData]);
 
-// we were using a useEffect here
+  // we were using a useEffect here
   useFocusEffect(
     useCallback(() => {
       getPost();
@@ -101,16 +126,24 @@ const Admin = (props) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.center}>
-        <Text>Welcome {props.userData.userName}🤠</Text>
+      <View style={styles.headerContainer}>
         <TouchableOpacity
-          style={styles.editButton}
+          style={styles.profileButton}
           onPress={() => {
             props.navigation.navigate("Profile");
           }}
         >
-          <Text>Profile</Text>
+          <Text>
+            <Ionicons
+              name="md-person-circle-outline"
+              size={36}
+              color="#008DD5"
+            />
+          </Text>
         </TouchableOpacity>
+        <Text style={styles.headerText}>
+          Welcome back {props.userData.userName}
+        </Text>
       </View>
       <View style={styles.latestContainer}>
         <Text style={styles.latestHeader}>Latest Blogs</Text>
@@ -120,6 +153,12 @@ const Admin = (props) => {
         style={styles.flatlist}
         renderItem={({ item, index }) => (
           <View key={index} style={styles.flatlistContainer}>
+            <View style={styles.blogInfo}>
+              <Text style={styles.blogAuthor}>{item.userName}</Text>
+              <Text style={styles.blogDot}>·</Text>
+              <Text style={styles.blogDate}>{item.date}</Text>
+            </View>
+
             <Text style={styles.blogTitle}>{item.subject}</Text>
             <Text style={styles.blogText}>{item.text}</Text>
           </View>

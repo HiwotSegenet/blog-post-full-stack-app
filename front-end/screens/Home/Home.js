@@ -7,11 +7,11 @@ const backgroundImg =
 
 const Home = (props) => {
   const [searching, setSearching] = useState(true);
-
+  /*
   useEffect(() => {
     if (props.userData.id) props.navigation.navigate("Admin");
   }, [props.userData]);
-
+*/
   return (
     <View style={styles.container}>
       {searching ? (

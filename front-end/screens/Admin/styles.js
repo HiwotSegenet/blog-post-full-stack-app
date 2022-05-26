@@ -3,6 +3,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#dfe4ea",
+    justifyContent: "center",
     //backgroundColor: "#f5fcfe",
   },
   latestContainer: {
@@ -12,16 +13,16 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     backgroundColor: "#f1f2f6",
     borderRadius: 8,
-    height: 100,
-    width: "98%",
-    margin: 10,
+    height: 120,
+    width: "100%",
+    marginVertical: 10,
   },
 
-  center: {
+  headerContainer: {
     alignContent: "center",
     alignItems: "center",
     //justifyContent: "center",
-    marginTop: 80,
+    marginTop: 50,
   },
   latestHeader: {
     fontSize: 32,
@@ -34,31 +35,55 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     width: "90%",
   },
-
-  editButton: {
-    backgroundColor: "red",
+  profileButton: {
+    alignSelf: "flex-end",
+    marginRight: 35,
   },
 
+  headerText: {
+    fontSize: 24,
+    marginVertical: 20,
+  },
+
+  blogInfo: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  blogAuthor: {
+    fontSize: 18,
+    marginLeft: 20,
+    marginRight: 5,
+  },
+  blogDot: {
+    fontSize: 32,
+    color: "#000",
+  },
+  blogDate: {
+    fontSize: 16,
+    color: "#374151",
+    marginLeft: 5,
+  },
   blogTitle: {
+    marginLeft: 20,
+    marginBottom: 5,
     fontSize: 24,
     fontWeight: "bold",
     color: "#374151",
   },
   blogText: {
+    marginLeft: 20,
     fontSize: 18,
     color: "#452e4f",
   },
 
-  /** Modal Button */
+  /**-----------Modal Button----------*/
   buttonContainer: {
-    //flex: 1,
     height: "11%",
     paddingVertical: 0,
     position: "absolute",
     bottom: 10,
     right: 10,
     height: 70,
-    //backgroundColor: "black",
   },
   modalButton: {
     alignSelf: "flex-end",
@@ -139,4 +164,3 @@ const styles = StyleSheet.create({
 });
 
 export default styles;
-

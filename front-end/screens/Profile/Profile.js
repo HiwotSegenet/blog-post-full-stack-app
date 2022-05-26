@@ -8,10 +8,14 @@ import {
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Ionicons } from "@expo/vector-icons";
+
 import Blog from "../../components/Blog";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import styles from "./styles";
+
+import { Ionicons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
 const Profile = (props) => {
   const [userBlogs, setUserBlogs] = useState();
@@ -26,6 +30,7 @@ const Profile = (props) => {
     if (!props.userData.id) {
       props.navigation.navigate("Login");
     }
+    console.log("this is our usersBlogs ", userBlogs);
   }, []);
 
   const loadToken = async () => {
@@ -84,16 +89,12 @@ const Profile = (props) => {
       .then(() => {
         console.log("Blog post deleted.");
         getPost();
-        //props.navigation.navigate("Profile");
       })
       .catch(function (err) {
         console.log(err);
       });
   };
   const signOut = async () => {
-    /*props.setUserData({});
-    props.setToken("");
-    props.navigation.navigate("Login");*/
     try {
       await AsyncStorage.clear();
       props.setUserData({});
@@ -104,53 +105,63 @@ const Profile = (props) => {
   };
 
   return (
-    
     <View style={styles.container}>
-      <Pressable
-        style={styles.backButton}
-        onPress={() => props.navigation.navigate("Admin")}
-      >
-        <Ionicons name="md-chevron-back" size={40} color="#f6f9ff" />
-      </Pressable>
+      <View style={styles.navContainer}>
+        <Pressable
+          style={styles.backButton}
+          onPress={() => props.navigation.navigate("Admin")}
+        >
+          <Ionicons name="md-chevron-back" size={40} color="#f6f9ff" />
+        </Pressable>
 
-      <View style={styles.content}>
-        <Text>Hi {props.userData.userName}</Text>
-        <TouchableOpacity onPress={() => signOut()}>
-          <Text>Sign out</Text>
+        <TouchableOpacity
+          style={styles.signOutButton}
+          onPress={() => signOut()}
+        >
+          <Text>
+            <FontAwesome name="sign-out" size={36} color="#e55039" />
+          </Text>
         </TouchableOpacity>
-
-        <FlatList
-          data={userBlogs}
-          style={styles.flatlist}
-          renderItem={({ item, index }) => (
-            <View style={styles.flatlistContainer}>
-              <Text style={styles.blogTitle}>{item.subject}</Text>
-              <Text style={styles.blogText}>{item.text}</Text>
-
-              <TouchableOpacity>
-                <Text
-                  onPress={() => {
-                    props.navigation.navigate("Edit", {
-                      item: item,
-                      index: index,
-                      //item: item._id,
-                    });
-                  }}
-                >
-                  Edit
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => deletePost(item._id)}>
-                <Text>Trash 🗑️</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-          //keyExtractor={(item) => item._id}
-          keyExtractor={(item, index) => index.toString()}
-        />
       </View>
-    </View>
 
+      <FlatList
+        data={userBlogs}
+        style={styles.flatlist}
+        renderItem={({ item, index }) => (
+          <View style={styles.flatlistContainer}>
+            <Pressable style={styles.blogOptions}>
+              <MaterialCommunityIcons
+                name="dots-horizontal"
+                size={28}
+                color="#b2bec3"
+              />
+            </Pressable>
+
+            <Text style={styles.blogTitle}>{item.subject}</Text>
+            <Text style={styles.blogText}>{item.text}</Text>
+
+            <TouchableOpacity>
+              <Text
+                onPress={() => {
+                  props.navigation.navigate("Edit", {
+                    item: item,
+                    index: index,
+                    //item: item._id,
+                  });
+                }}
+              >
+                Edit
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => deletePost(item._id)}>
+              <Text>Trash 🗑️</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        //keyExtractor={(item) => item._id}
+        keyExtractor={(item, index) => index.toString()}
+      />
+    </View>
   );
 };
 

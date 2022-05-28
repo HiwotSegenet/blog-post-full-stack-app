@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginVertical: 10,
     width: "90%",
+    //flexWrap: "nowrap",
   },
   profileButton: {
     alignSelf: "flex-end",
@@ -65,7 +66,6 @@ const styles = StyleSheet.create({
   },
   blogTitle: {
     marginLeft: 20,
-    marginBottom: 5,
     fontSize: 24,
     fontWeight: "bold",
     color: "#374151",

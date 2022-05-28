@@ -33,15 +33,11 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     marginRight: 20,
   },
-  editButton: {
-    backgroundColor: "red",
-  },
   blogContainer: {
     flexDirection: "column",
   },
   blogTitle: {
     marginLeft: 20,
-    marginBottom: 5,
     fontSize: 24,
     fontWeight: "bold",
     color: "#374151",
@@ -59,6 +55,59 @@ const styles = StyleSheet.create({
   signOutButton: {
     //alignSelf: "flex-end",
     marginRight: 22,
+  },
+
+  /*---- Modal Starts Here ----*/
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 0,
+    padding: 20,
+    backgroundColor: "rgba(52, 52, 52, 0.6)",
+  },
+  modalView: {
+    //margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    //padding: 25,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    width: "99%",
+    height: "20%",
+  },
+  closeModal: {
+    alignSelf: "flex-end",
+    marginBottom: 15,
+    marginTop: 10,
+    marginRight: 15,
+    //marginLeft: 100,
+  },
+  buttonContainer: {
+    width: "100%",
+  },
+  modalText: {
+    fontSize: 24,
+    color: "#374151",
+  },
+  modalButton: {
+    alignItems: "center",
+  },
+  editButton: {
+    width: "100%",
+    borderBottomWidth: 1,
+    borderBottomColor: "#ccc",
+    paddingBottom: 10,
+  },
+  deleteButton: {
+    paddingTop: 10,
   },
 });
 export default styles;

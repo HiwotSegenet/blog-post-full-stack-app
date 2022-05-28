@@ -5,6 +5,7 @@ import {
   Pressable,
   Platform,
   FlatList,
+  Modal,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -15,10 +16,14 @@ import styles from "./styles";
 
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 
 const Profile = (props) => {
   const [userBlogs, setUserBlogs] = useState();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [details, setDetails] = useState();
+  const [itemIndex, setItemIndex] = useState();
 
   let UrlString = "localhost";
 
@@ -30,7 +35,6 @@ const Profile = (props) => {
     if (!props.userData.id) {
       props.navigation.navigate("Login");
     }
-    console.log("this is our usersBlogs ", userBlogs);
   }, []);
 
   const loadToken = async () => {
@@ -47,19 +51,14 @@ const Profile = (props) => {
     const config = {
       headers: { "x-auth-token": token },
     };
-    return (
-      axios
-        .get(`http://${UrlString}:5054/blog`, config)
-        // {
-        //   authorId: props.userData.id,
-        // }
-        .then(function (response) {
-          setUserBlogs(response.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        })
-    );
+    return axios
+      .get(`http://${UrlString}:5054/blog`, config)
+      .then(function (response) {
+        setUserBlogs(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   // This gets the blogs made by this user
@@ -84,7 +83,7 @@ const Profile = (props) => {
         _id: id,
       })
       .then(function (res) {
-        console.log("This is res data ===>", res.data);
+        //console.log("This is res data ===>", res.data);
       })
       .then(() => {
         console.log("Blog post deleted.");
@@ -98,10 +97,35 @@ const Profile = (props) => {
     try {
       await AsyncStorage.clear();
       props.setUserData({});
-      // props.navigation.navigate("Login");
     } catch (e) {
       console.log(e);
     }
+  };
+
+  const renderItem = ({ item, index }) => {
+    return (
+      <View style={styles.flatlistContainer}>
+        <Pressable
+          style={styles.blogOptions}
+          onPress={() => {
+            setModalVisible(true);
+            setDetails(item);
+            setItemIndex(index);
+          }}
+        >
+          <MaterialCommunityIcons
+            name="dots-horizontal"
+            size={28}
+            color="#b2bec3"
+          />
+        </Pressable>
+
+        <Text style={styles.blogTitle}>{item.subject}</Text>
+        <Text numberOfLines={2} style={styles.blogText}>
+          {item.text}
+        </Text>
+      </View>
+    );
   };
 
   return (
@@ -119,7 +143,7 @@ const Profile = (props) => {
           onPress={() => signOut()}
         >
           <Text>
-            <FontAwesome name="sign-out" size={36} color="#e55039" />
+            <FontAwesome name="sign-out" size={36} color="#E64F2C" />
           </Text>
         </TouchableOpacity>
       </View>
@@ -127,55 +151,71 @@ const Profile = (props) => {
       <FlatList
         data={userBlogs}
         style={styles.flatlist}
-        renderItem={({ item, index }) => (
-          <View style={styles.flatlistContainer}>
-            <Pressable style={styles.blogOptions}>
-              <MaterialCommunityIcons
-                name="dots-horizontal"
-                size={28}
-                color="#b2bec3"
-              />
-            </Pressable>
-
-            <Text style={styles.blogTitle}>{item.subject}</Text>
-            <Text style={styles.blogText}>{item.text}</Text>
-
-            <TouchableOpacity>
-              <Text
-                onPress={() => {
-                  props.navigation.navigate("Edit", {
-                    item: item,
-                    index: index,
-                    //item: item._id,
-                  });
-                }}
-              >
-                Edit
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => deletePost(item._id)}>
-              <Text>Trash 🗑️</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-        //keyExtractor={(item) => item._id}
+        renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
       />
+
+      <Modal
+        statusBarTranslucent={true}
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <View style={styles.closeModal}>
+              <Pressable
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <Text>
+                  <AntDesign name="closecircleo" size={24} color="#e55039" />
+                </Text>
+              </Pressable>
+            </View>
+            <View style={styles.buttonContainer}>
+              <View style={styles.editButton}>
+                <TouchableOpacity style={styles.modalButton}>
+                  <Text
+                    style={styles.modalText}
+                    onPress={() => {
+                      props.navigation.navigate("Edit", {
+                        details: details,
+                        itemIndex: itemIndex,
+                        //item: item._id,
+                      });
+                    }}
+                  >
+                    Edit{" "}
+                    <FontAwesome
+                      name="pencil-square-o"
+                      size={30}
+                      color="#008DD5"
+                    />
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.deleteButton}>
+                <TouchableOpacity
+                  style={styles.modalButton}
+                  onPress={() => deletePost(details._id)}
+                >
+                  <Text style={styles.modalText}>
+                    Delete{" "}
+                    <FontAwesome name="trash" size={30} color="#E64F2C" />
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
 
 export default Profile;
-
-/**
- * 
- * <Blog
-            item={item}
-            index={index}
-            userId={props.userData.id}
-            // id={item._id}
-            // subject={item.subject}
-            // text={item.text}
-            // authorId={item.authorId}
-          />
-*/

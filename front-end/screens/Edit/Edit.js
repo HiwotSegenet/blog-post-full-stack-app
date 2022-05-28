@@ -10,10 +10,12 @@ import axios from "axios";
 import styles from "./styles";
 
 const Edit = (props) => {
-  const { item, index } = props.route.params;
+  //const { item, index } = props.route.params;
+  const { details, itemIndex } = props.route.params;
   const [subject, setSubject] = useState();
   const [text, setText] = useState();
-  let id = item._id;
+  //let id = item._id;
+  let id = details._id;
 
   let UrlString = "localhost";
 
@@ -22,14 +24,8 @@ const Edit = (props) => {
   }
 
   useEffect(() => {
-    console.log("this is our subject " + item.subject);
-    console.log("this is our text " + item.text);
-    console.log("this is our id " + item._id);
-
-    console.log("this is the index of the item", index);
-
-    setSubject(item.subject);
-    setText(item.text);
+    setSubject(details.subject);
+    setText(details.text);
   }, []);
 
   const updatePost = async (index) => {
@@ -75,7 +71,7 @@ const Edit = (props) => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => updatePost(props.blogData.indexOf(item))}
+          onPress={() => updatePost(props.blogData.indexOf(details))}
         >
           <Text>Publish</Text>
         </TouchableOpacity>

@@ -149,8 +149,9 @@ const Admin = (props) => {
         <Text style={styles.latestHeader}>Latest Blogs</Text>
       </View>
       <FlatList
-        data={props.blogData}
+        data={props.blogData.reverse()}
         style={styles.flatlist}
+        //inverted={true}
         renderItem={({ item, index }) => (
           <View key={index} style={styles.flatlistContainer}>
             <View style={styles.blogInfo}>
@@ -160,7 +161,9 @@ const Admin = (props) => {
             </View>
 
             <Text style={styles.blogTitle}>{item.subject}</Text>
-            <Text style={styles.blogText}>{item.text}</Text>
+            <Text numberOfLines={2} style={styles.blogText}>
+              {item.text}
+            </Text>
           </View>
         )}
         keyExtractor={(item) => item._id}

@@ -72,8 +72,6 @@ const Admin = (props) => {
     return axios
       .get(`http://${UrlString}:5054/blog/all`, config)
       .then(function (response) {
-        console.log("this is blog data ===>", response.data);
-        console.log("this is authorId data ====> ", props.userData.id);
         props.setBlogData(response.data);
       })
       .catch(function (error) {

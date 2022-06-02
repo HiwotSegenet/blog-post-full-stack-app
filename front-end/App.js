@@ -4,21 +4,29 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "./screens/Login/Login";
 import Admin from "./screens/Admin/Admin";
-import Register from "./screens/Register/Register";
+// import Register from "./screens/Register/Register";
 import Profile from "./screens/Profile/Profile";
 import Edit from "./screens/Edit/Edit";
+import { Ionicons } from '@expo/vector-icons'; 
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { FontAwesome5 } from '@expo/vector-icons'; 
+
+
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { Platform } from "react-native";
+import Home from "./screens/Home/Home"
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+
+
 export default function App() {
   const [userData, setUserData] = useState({});
   const [blogData, setBlogData] = useState([]);
-
+  
 
   useEffect(() => {
     let UrlString = "localhost";
@@ -40,8 +48,10 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator initialRouteName="Login">
-        <Tab.Screen name="Login" options={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Login" options={{
+                    tabBarIcon: ({size, color}) => (<MaterialCommunityIcons name={"login-variant"} color={"#4CAB72"} size={24} />)
+                }} >
           {(props) => (
             <Login
               userData={userData}
@@ -49,11 +59,16 @@ export default function App() {
               {...props}
             ></Login>
           )}
-        </Tab.Screen>
-        <Stack.Screen name="Register" options={{ headerShown: false }}>
-          {(props) => <Register {...props}></Register>}
         </Stack.Screen>
-        <Stack.Screen name="Admin" options={{ headerShown: false }}>
+
+        <Stack.Screen name="Home" options={{
+                    tabBarIcon: () => (<Ionicons name={"md-home-sharp"} color={"#4CAB72"} size={24} />)
+                }}>
+          {(props) => <Home {...props}></Home>}
+        </Stack.Screen>
+        <Stack.Screen name="Admin" options={{
+                    tabBarIcon: () => (<FontAwesome5 name={"blog"} color={"#4CAB72"} size={24} />)
+                }}>
           {(props) => (
             <Admin
               setUserData={setUserData}
@@ -64,7 +79,9 @@ export default function App() {
             ></Admin>
           )}
         </Stack.Screen>
-        <Stack.Screen name="Profile" options={{ headerShown: false }}>
+        <Stack.Screen name="Profile" options={{
+                    tabBarIcon: () => (<FontAwesome5 name={"user-cog"} color={"#4CAB72"} size={24} />)
+                }} >
           {(props) => (
             <Profile
               setUserData={setUserData}
@@ -75,19 +92,20 @@ export default function App() {
             ></Profile>
           )}
         </Stack.Screen>
+        <Stack.Screen name="Edit" options={{ headerShown: false}}>
+          {(props) => (
+            <Edit
+              setUserData={setUserData}
+              userData={userData}
+              setBlogData={setBlogData}
+              blogData={blogData}
+              {...props}
+            ></Edit>
+          )}
+        </Stack.Screen>
       
-      <Stack.Screen name="Edit" options={{ headerShown: false }}>
-        {(props) => (
-          <Edit
-            setUserData={setUserData}
-            userData={userData}
-            setBlogData={setBlogData}
-            blogData={blogData}
-            {...props}
-          ></Edit>
-        )}
-      </Stack.Screen>
-      </Tab.Navigator>
+     
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

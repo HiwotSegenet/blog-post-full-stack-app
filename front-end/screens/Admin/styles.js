@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 
   flatlistContainer: {
     flexDirection: "column",
-    backgroundColor: "rgba(75,88,81,0.7)",
+    backgroundColor: "beige",
     // height: 100,
     width: 350,
     margin: 10,
@@ -59,11 +59,11 @@ const styles = StyleSheet.create({
   blogTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#f5fcfe",
+    color: "#827717",
   },
   blogText: {
     fontSize: 18,
-    color: "#f5fcfe",
+    color: "#827717",
     width: 340,
     paddingBottom: 10,
   },
@@ -85,15 +85,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginLeft: 20,
     marginRight: 5,
-    color: "white",
+    color: "#827717",
   },
   blogDot: {
     fontSize: 32,
-    color: "white",
+    color: "#827717",
   },
   blogDate: {
     fontSize: 16,
-    color: "white",
+    color: "#827717",
     marginLeft: 5,
   },
 
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     //flex: 1,
     height: "11%",
     paddingVertical: 0,
-    //backgroundColor: "black",
+    // backgroundColor: "black",
   },
   modalButton: {
     alignSelf: "flex-end",

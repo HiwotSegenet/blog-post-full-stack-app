@@ -5,10 +5,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    // backgroundColor: "#4CAB72",
+    backgroundColor: "beige",
   },
   homeImg: {
-    width: 500,
+    width: 350,
     flex: 1,
     resizeMode: "cover",
     height: 850,

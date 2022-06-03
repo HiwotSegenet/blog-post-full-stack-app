@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   flatlistContainer: {
     // flexDirection: "column",
-    backgroundColor: "rgba(75,88,81,0.7)",
+    backgroundColor: "beige",
     // height: 300,
     // width: 350,
     margin: 10,
@@ -41,14 +41,14 @@ const styles = StyleSheet.create({
   blogTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#f5fcfe",
+    color: "#827717",
   },
   blogText: {
     fontSize: 18,
-    color: "#f5fcfe",
+    color: "#827717",
   },
   backButton: {
-    backgroundColor: "white",
+    backgroundColor: "#FFFFFF",
     marginLeft: 22,
     marginTop: 50,
     marginBottom: 50,
@@ -56,18 +56,18 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
   },
   signOutButton: {
-    backgroundColor: "white",
+    backgroundColor: "#FFFFFF",
     borderRadius: 60,
     alignSelf: "flex-end",
     marginTop: -85,
     marginRight: 20,
     width: 90,
     height: 30,
-    backgroundColor: "#4CAB72",
+    // backgroundColor: "#4CAB72",
     paddingTop: 4,
   },
-  signoutText: {
-    color: "white",
+  signOutText: {
+    color: "#689F38",
     textAlign: "center",
   },
   userProfile: {

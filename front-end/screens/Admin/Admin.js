@@ -126,7 +126,7 @@ const Admin = (props) => {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.adminBg} source={require("../Images/img4.png")} />
+      <Image style={styles.adminBg} source={require("../Images/img5.png")} />
       <View style={styles.center}>
         <TouchableOpacity
           style={styles.editButton}
@@ -134,7 +134,7 @@ const Admin = (props) => {
             props.navigation.navigate("Profile");
           }}
         >
-          <FontAwesome5 name={"user-cog"} color={"white"} size={30} />
+          <FontAwesome5 name={"user-cog"} color={"#689F38"} size={35} />
         </TouchableOpacity>
       </View>
       <View style={styles.latestContainer}>
@@ -169,7 +169,7 @@ const Admin = (props) => {
           onPress={() => setModalVisible(true)}
         >
           <Text style={styles.modalText}>
-            <AntDesign name="pluscircle" size={50} color="white" />
+            <AntDesign name="pluscircle" size={50} color="#689F38" />
           </Text>
         </Pressable>
       </View>

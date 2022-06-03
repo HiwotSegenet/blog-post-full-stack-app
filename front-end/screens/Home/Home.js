@@ -52,7 +52,7 @@ const Home = (props) => {
         <Ionicons name="md-chevron-back" size={40} color="#f6f9ff" />
       </Pressable>
 
-      <Image style={styles.homeImg} source={require("../Images/img6.png")} />
+      <Image style={styles.homeImg} source={require("../Images/img.png")} />
 
       <KeyboardAvoidingView style={styles.view2Container} behavior="padding">
         <View style={styles.innerContainer}>

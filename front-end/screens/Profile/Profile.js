@@ -148,10 +148,10 @@ const Profile = (props) => {
         style={styles.backButton}
         onPress={() => props.navigation.navigate("Admin")}
       >
-        <Ionicons name="md-chevron-back" size={40} color="#4CAB72" />
+        <Ionicons name="md-chevron-back" size={40} color="#689F38" />
       </Pressable>
       <TouchableOpacity style={styles.signOutButton} onPress={() => signOut()}>
-        <Text style={styles.signoutText}>Sign out</Text>
+        <Text style={styles.signOutText}>Sign out</Text>
       </TouchableOpacity>
 
       {/* <View style={styles.content}> */}

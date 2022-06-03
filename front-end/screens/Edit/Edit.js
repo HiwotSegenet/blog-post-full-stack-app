@@ -51,7 +51,7 @@ const Edit = (props) => {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.adminBg} source={require("../Images/img4.png")} />
+      <Image style={styles.adminBg} source={require("../Images/img2.png")} />
 
       <Pressable
         style={styles.backButton}

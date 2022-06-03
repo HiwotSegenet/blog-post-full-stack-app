@@ -4,7 +4,7 @@ import {
   TextInput,
   TouchableOpacity,
   Platform,
-  ImageBackground,
+  Image,
   KeyboardAvoidingView,
 } from "react-native";
 import React, { useState, useEffect } from "react";
@@ -60,25 +60,28 @@ const Login = (props) => {
 
   return (
     <KeyboardAvoidingView style={styles.container}>
+      <Image style={styles.img3Bg} source={require("../Images/img3.png")} />
       <View style={styles.headerContainer}>
         <Text style={styles.headerText}>Hawsa Blog!</Text>
       </View>
       <View style={styles.loginContainer}>
-        <Text style={styles.loginHeader}>Login</Text>
+        {/* <Text style={styles.loginHeader}>Login</Text> */}
         <View style={styles.inputContainer}>
-          <Text>Your Email</Text>
+          <Text style={styles.text1}>Email</Text>
           <TextInput
             style={styles.loginInput}
             onChangeText={setEmail}
             value={email}
             placeholder="Email"
+            placeholderTextColor={"#B4B9B7"}
           />
-          <Text>Your Password</Text>
+          <Text style={styles.text1}>Password</Text>
           <TextInput
             style={styles.loginInput}
             onChangeText={setPassword}
             value={password}
             placeholder="********"
+            placeholderTextColor={"#B4B9B7"}
             secureTextEntry={true}
           />
         </View>
@@ -89,19 +92,15 @@ const Login = (props) => {
             </Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.register} onPress={register}>
-          <Text style={styles.registerText}>Sign up</Text>
-        </TouchableOpacity>
+        <View style={styles.bottomContainer}>
+          <Text style={styles.text1}>Create an account? </Text>
+          <TouchableOpacity onPress={() => props.navigation.navigate("Home")}>
+            <Text style={styles.registerText}>Sign up</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </KeyboardAvoidingView>
   );
 };
 
 export default Login;
-/**
- * <ImageBackground
-      source={require(backgroundImg)}
-      resizeMode="cover"
-      style={styles.background}
-    >
- */

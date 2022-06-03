@@ -7,6 +7,7 @@ import {
   Pressable,
   Platform,
   FlatList,
+  Image,
 } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useState, useEffect, useCallback } from "react";
@@ -14,6 +15,7 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 import styles from "./styles";
 
@@ -29,6 +31,28 @@ const Admin = (props) => {
   if (Platform.OS == "android") {
     UrlString = "10.0.2.2";
   }
+
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const d = new Date();
+  let month = monthNames[d.getMonth()];
+  let day = d.getDate();
+  let year = d.getFullYear();
+
+  let datePosted = `${month} ${day}, ${year}`;
 
   const loadToken = async () => {
     try {
@@ -69,6 +93,8 @@ const Admin = (props) => {
           subject: subject,
           text: text,
           authorId: props.userData.id,
+          userName: props.userData.userName,
+          date: datePosted,
         },
         config
       )
@@ -91,6 +117,7 @@ const Admin = (props) => {
     }
   }, [props.userData]);
 
+  // we were using a useEffect here
   useFocusEffect(
     useCallback(() => {
       getPost();
@@ -99,27 +126,37 @@ const Admin = (props) => {
 
   return (
     <View style={styles.container}>
+      <Image style={styles.adminBg} source={require("../Images/img4.png")} />
       <View style={styles.center}>
-        <Text>Welcome {props.userData.userName}🤠</Text>
         <TouchableOpacity
           style={styles.editButton}
           onPress={() => {
             props.navigation.navigate("Profile");
           }}
         >
-          <Text>Profile</Text>
+          <FontAwesome5 name={"user-cog"} color={"white"} size={30} />
         </TouchableOpacity>
       </View>
       <View style={styles.latestContainer}>
         <Text style={styles.latestHeader}>Latest Blogs</Text>
       </View>
       <FlatList
-        data={props.blogData}
+        data={props.blogData.reverse()}
         style={styles.flatlist}
         renderItem={({ item, index }) => (
           <View key={index} style={styles.flatlistContainer}>
-            <Text style={styles.blogTitle}>{item.subject}</Text>
-            <Text style={styles.blogText}>{item.text}</Text>
+            <View style={styles.blogInfo}>
+              <Text style={styles.blogAuthor}>{item.userName}</Text>
+              <Text style={styles.blogDot}>·</Text>
+              <Text style={styles.blogDate}>{item.date}</Text>
+            </View>
+
+            <View style={styles.view3}>
+              <Text style={styles.blogTitle}>{item.subject}</Text>
+            </View>
+            <View style={styles.view2}>
+              <Text style={styles.blogText}>{item.text}</Text>
+            </View>
           </View>
         )}
         keyExtractor={(item) => item._id}
@@ -132,7 +169,7 @@ const Admin = (props) => {
           onPress={() => setModalVisible(true)}
         >
           <Text style={styles.modalText}>
-            <AntDesign name="pluscircle" size={50} color="#DFF3E4" />
+            <AntDesign name="pluscircle" size={50} color="white" />
           </Text>
         </Pressable>
       </View>

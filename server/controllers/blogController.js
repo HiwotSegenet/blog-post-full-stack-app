@@ -5,7 +5,7 @@ module.exports = {
     try {
       // get all user blogs by the user.id
       // from the auth middleware
-      const allUserPosts = await Blog.find({ userId: req.user.id });
+      const allUserPosts = await Blog.find({ authorId: req.user.id });
       // send all user blog entries as json
       res.json(allUserPosts);
     } catch (err) {
@@ -27,7 +27,7 @@ module.exports = {
 
   createBlogPost: async (req, res) => {
     // look into req.body for subject and text keys
-    const { subject, text } = req.body;
+    const { subject, text, date } = req.body;
 
     console.log("user id", req.user);
     try {
@@ -36,7 +36,9 @@ module.exports = {
       const newPost = await new Blog({
         subject,
         text,
-        userId: req.user.id,
+        authorId: req.user.id,
+        userName: req.user.userName,
+        date,
       }).save();
 
       // on success send new blog back as json

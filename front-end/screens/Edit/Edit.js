@@ -4,16 +4,22 @@ import {
   TextInput,
   TouchableOpacity,
   Platform,
+  Image,
+  Pressable,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+
 import styles from "./styles";
+import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
 const Edit = (props) => {
-  const { item, index } = props.route.params;
-  const [subject, setSubject] = useState(item.subject);
-  const [text, setText] = useState(item.text);
-  let id = item._id;
+  const { details, itemIndex } = props.route.params;
+  const [subject, setSubject] = useState();
+  const [text, setText] = useState();
+  // let id = item._id;
+  let id = details._id;
 
   let UrlString = "localhost";
 
@@ -22,11 +28,8 @@ const Edit = (props) => {
   }
 
   useEffect(() => {
-    console.log("this is our subject " + item.subject);
-    console.log("this is our text " + item.text);
-    console.log("this is our id " + item._id);
-
-    console.log("this is the index of the item", index);
+    setSubject(details.subject);
+    setText(details.text);
   }, []);
 
   const updatePost = async (index) => {
@@ -37,8 +40,8 @@ const Edit = (props) => {
         text: text,
       })
       .then(() => {
-        setSubject("");
-        setText("");
+        //setSubject("");
+        //setText("");
         props.navigation.navigate("Admin");
       })
       .catch(function (err) {
@@ -48,27 +51,46 @@ const Edit = (props) => {
 
   return (
     <View style={styles.container}>
+      <Image style={styles.adminBg} source={require("../Images/img2.png")} />
+
+      <Pressable
+        style={styles.backButton}
+        onPress={() => props.navigation.navigate("Profile")}
+      >
+        <Ionicons name="md-chevron-back" size={40} color="#4CAB72" />
+      </Pressable>
       <View style={styles.content}>
         <TouchableOpacity>
-          <Text>Subject</Text>
+          <Text style={styles.text}>Subject</Text>
           <TextInput
             placeholder="type your title here"
+            placeholderTextColor={"#B4B9B7"}
             value={subject}
             onChangeText={setSubject}
+            style={styles.text1}
           />
-          <Text>Body</Text>
+          <Text style={styles.text}>Body</Text>
           <TextInput
             placeholder="type your message here"
+            placeholderTextColor={"#B4B9B7"}
             value={text}
             onChangeText={setText}
+            style={styles.text1}
           />
         </TouchableOpacity>
 
         <TouchableOpacity
           //onPress={() => updatePost(item._id, item.subject, item.text)}
-          onPress={() => updatePost(props.blogData.indexOf(item))}
+          onPress={() => updatePost(props.blogData.indexOf(details))}
+          style={styles.publishTextContainer}
         >
-          <Text>Publish</Text>
+          <Text style={styles.publishText}>Publish</Text>
+          <FontAwesome
+            name="pencil-square-o"
+            size={24}
+            color="#DFF3E4"
+            style={styles.iconEdit}
+          />
         </TouchableOpacity>
       </View>
     </View>

@@ -9,16 +9,23 @@ import {
   FlatList,
   StyleSheet,
   ScrollView,
+  Image,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Ionicons } from "@expo/vector-icons";
 import Blog from "../../components/Blog";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import styles from "./styles";
 
 const Profile = (props) => {
   const [userBlogs, setUserBlogs] = useState();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [details, setDetails] = useState();
+  const [itemIndex, setItemIndex] = useState();
 
   let UrlString = "localhost";
 
@@ -83,17 +90,18 @@ const Profile = (props) => {
         _id: id,
       })
       .then(function (res) {
-        console.log("This is res data ===>", res.data);
+        //console.log("This is res data ===>", res.data);
       })
       .then(() => {
         console.log("Blog post deleted.");
+        setModalVisible(!modalVisible);
         getPost();
-        //props.navigation.navigate("Profile");
       })
       .catch(function (err) {
         console.log(err);
       });
   };
+
   const signOut = async () => {
     /*props.setUserData({});
     props.setToken("");
@@ -101,60 +109,157 @@ const Profile = (props) => {
     try {
       await AsyncStorage.clear();
       props.setUserData({});
-      // props.navigation.navigate("Login");
+      props.navigation.navigate("Login");
     } catch (e) {
       console.log(e);
     }
   };
 
+  const renderItem = ({ item, index }) => {
+    return (
+      <View style={styles.flatlistContainer}>
+        <Pressable
+          style={styles.blogOptions}
+          onPress={() => {
+            setModalVisible(true);
+            setDetails(item);
+            setItemIndex(index);
+          }}
+        >
+          <MaterialCommunityIcons
+            name="dots-horizontal"
+            size={28}
+            color="#b2bec3"
+          />
+        </Pressable>
+
+        <Text style={styles.blogTitle}>{item.subject}</Text>
+        <Text numberOfLines={2} style={styles.blogText}>
+          {item.text}
+        </Text>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
+      <Image style={styles.profileBg} source={require("../Images/img4.png")} />
       <Pressable
         style={styles.backButton}
         onPress={() => props.navigation.navigate("Admin")}
       >
-        <Ionicons name="md-chevron-back" size={40} color="#f6f9ff" />
+        <Ionicons name="md-chevron-back" size={40} color="#689F38" />
       </Pressable>
+      <TouchableOpacity style={styles.signOutButton} onPress={() => signOut()}>
+        <Text style={styles.signOutText}>Sign out</Text>
+      </TouchableOpacity>
 
-      <View style={styles.content}>
-        <Text>Hi {props.userData.userName}</Text>
-        <TouchableOpacity onPress={() => signOut()}>
-          <Text>Sign out</Text>
-        </TouchableOpacity>
+      {/* <View style={styles.content}> */}
+      <Text style={styles.userProfile}>Hello {props.userData.userName}</Text>
 
-        <FlatList
+      {/* <FlatList
           data={userBlogs}
           style={styles.flatlist}
           renderItem={({ item, index }) => (
             <View style={styles.flatlistContainer}>
+              <View style={styles.view2}>
               <Text style={styles.blogTitle}>{item.subject}</Text>
+              </View>
+              <ScrollView style={styles.view2}>
               <Text style={styles.blogText}>{item.text}</Text>
-              <TouchableOpacity>
-                <Text
-                  onPress={() => {
+              </ScrollView>
+<View style={styles.actionContainer}>
+<TouchableOpacity  onPress={() => {
                     props.navigation.navigate("Edit", {
                       item: item,
                       index: index,
                       //item: item._id,
                     });
-                  }}
-                >
+                  }}>
+                <Text style={styles.texts}>
                   Edit
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => deletePost(item._id)}>
-                <Text>Trash 🗑️</Text>
+                <Text style={styles.texts}>Delete</Text>
               </TouchableOpacity>
+</View>
+              
             </View>
           )}
           //keyExtractor={(item) => item._id}
           keyExtractor={(item, index) => index.toString()}
-        />
-      </View>
-    </View>
+        /> */}
 
+      <FlatList
+        data={userBlogs}
+        style={styles.flatlist}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
+      />
+
+      <Modal
+        statusBarTranslucent={true}
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <View style={styles.closeModal}>
+              <Pressable
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <Text>
+                  <AntDesign name="closecircleo" size={24} color="#e55039" />
+                </Text>
+              </Pressable>
+            </View>
+            <View style={styles.buttonContainer}>
+              <View style={styles.editButton}>
+                <TouchableOpacity style={styles.modalButton}>
+                  <Text
+                    style={styles.modalText}
+                    onPress={() => {
+                      props.navigation.navigate("Edit", {
+                        details: details,
+                        itemIndex: itemIndex,
+                        //item: item._id,
+                      });
+                      setModalVisible(!modalVisible);
+                    }}
+                  >
+                    Edit{" "}
+                    <FontAwesome
+                      name="pencil-square-o"
+                      size={30}
+                      color="#008DD5"
+                    />
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.deleteButton}>
+                <TouchableOpacity
+                  style={styles.modalButton}
+                  onPress={() => deletePost(details._id)}
+                >
+                  <Text style={styles.modalText}>
+                    Delete{" "}
+                    <FontAwesome name="trash" size={30} color="#E64F2C" />
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </View>
+      </Modal>
+    </View>
   );
 };
 
 export default Profile;
-

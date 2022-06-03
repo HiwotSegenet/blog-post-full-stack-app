@@ -2,18 +2,36 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#008DD5",
+    // backgroundColor: "#008DD5",
     //backgroundColor: "#f5fcfe",
+  },
+  adminBg: {
+    width: 500,
+    height: 850,
+    position: "absolute",
+    flex: 1,
+    resizeMode: "stretch",
+    // bottom: 100,
+    // top: -50,
   },
   latestContainer: {
     marginLeft: 20,
   },
+
   flatlistContainer: {
     flexDirection: "column",
-    backgroundColor: "#eaeaea",
-    height: 80,
-    width: 300,
+    backgroundColor: "beige",
+    // height: 100,
+    width: 350,
     margin: 10,
+    // backgroundColor: 'white',
+    borderRadius: 10,
+
+    // paddingVertical: 45,
+    paddingHorizontal: 15,
+    // maxWidth: '100%',
+    // maxHeight: "100%",
+    paddingBottom: 10,
   },
 
   center: {
@@ -34,18 +52,49 @@ const styles = StyleSheet.create({
   },
 
   editButton: {
-    backgroundColor: "red",
+    alignSelf: "flex-end",
+    marginRight: 20,
   },
 
   blogTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#374151",
+    color: "#827717",
   },
-
   blogText: {
     fontSize: 18,
-    color: "#452e4f",
+    color: "#827717",
+    width: 340,
+    paddingBottom: 10,
+  },
+  view3: {
+    // width: 300,
+    // height: 35,
+  },
+  view2: {
+    // width: 300,
+    // height: 60,
+    paddingBottom: 10,
+  },
+  blogInfo: {
+    flexDirection: "row",
+    alignItems: "center",
+    color: "white",
+  },
+  blogAuthor: {
+    fontSize: 18,
+    marginLeft: 20,
+    marginRight: 5,
+    color: "#827717",
+  },
+  blogDot: {
+    fontSize: 32,
+    color: "#827717",
+  },
+  blogDate: {
+    fontSize: 16,
+    color: "#827717",
+    marginLeft: 5,
   },
 
   /** Modal Button */
@@ -53,14 +102,13 @@ const styles = StyleSheet.create({
     //flex: 1,
     height: "11%",
     paddingVertical: 0,
-    //backgroundColor: "black",
+    // backgroundColor: "black",
   },
   modalButton: {
     alignSelf: "flex-end",
     marginTop: 15,
     height: 80,
     marginRight: 25,
-    backgroundColor: "#008DD5",
   },
   /*---- Modal Starts Here ----*/
   centeredView: {
@@ -107,4 +155,3 @@ const styles = StyleSheet.create({
 });
 
 export default styles;
-

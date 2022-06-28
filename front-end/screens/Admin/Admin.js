@@ -101,8 +101,7 @@ const Admin = (props) => {
         config
       )
       .then(function (res) {
-        //props.setBlogData(res.data); //blogs
-        //props.navigation.navigate("Profile");
+        
         getPost();
         setModalVisible(!modalVisible);
         setSubject("");

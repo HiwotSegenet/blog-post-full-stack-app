@@ -7,7 +7,8 @@ import {
   Pressable,
   Platform,
   FlatList,
-  Image
+  Image,
+  Alert
 } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useState, useEffect, useCallback } from "react";
@@ -146,6 +147,15 @@ const Admin = (props) => {
         style={styles.flatlist}
         renderItem={({ item, index }) => (
           <View key={index} style={styles.flatlistContainer}>
+             <Pressable
+              onPress={() => {
+                props.navigation.navigate("Blog", {
+                  item: item,
+                  index: index,
+                  //item: item._id,
+                });
+              }}
+            >
              <View style={styles.blogInfo}>
                 <Text style={styles.blogAuthor}>{item.userName}</Text>
                 <Text style={styles.blogDot}>·</Text>
@@ -157,9 +167,10 @@ const Admin = (props) => {
 
             </View>
             <View style={styles.view2}>
-            <Text style={styles.blogText}>{item.text}</Text>
+            <Text numberOfLines={2} style={styles.blogText}>{item.text}</Text>
 
             </View>
+            </Pressable>
           </View>
         )}
         keyExtractor={(item) => item._id}
@@ -177,78 +188,18 @@ const Admin = (props) => {
         </Pressable>
       </View>
 
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <TouchableOpacity>
-              <Text>Subject</Text>
-              <TextInput
-                placeholder="type your title here"
-                value={subject}
-                onChangeText={setSubject}
-              />
-              <Text>Body</Text>
-              <TextInput
-                placeholder="type your message here"
-                value={text}
-                onChangeText={setText}
-              />
-            </TouchableOpacity>
-            <Text>{setSubject}</Text>
-            <TouchableOpacity onPress={() => addPost()}>
-              <Text>Post</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
-    </View>
-  );
-};
-
-export default Admin;
-
-/**
- * useEffect(
-    async () => {
-      const token = await loadToken();
-      const config = {
-        headers: { "x-auth-token": token },
-      };
-      return (
-        axios
-          .get(`http://${UrlString}:5054/blog/all`, config)
-          // {
-          //   authorId: props.userData.id,
-          // }
-          .then(function (res) {
-            // setToken(response);
-            //props.setBlogData([...props.blogData, res.data]);
-
-            console.log(res.data);
-          })
-          .catch(function (error) {
-            console.log(error);
-          })
-      );
-    },
-    [
-      
-    ]
-    );
-
-
-
-    ------ post -----
-
-     <TouchableOpacity>
+     <Modal
+    animationType="slide"
+    transparent={true}
+    visible={modalVisible}
+    onRequestClose={() => {
+      Alert.alert("Modal has been closed.");
+      setModalVisible(!modalVisible);
+    }}
+  >
+    <View style={styles.centeredView}>
+      <View style={styles.modalView}>
+        <TouchableOpacity>
           <Text>Subject</Text>
           <TextInput
             placeholder="type your title here"
@@ -266,4 +217,14 @@ export default Admin;
         <TouchableOpacity onPress={() => addPost()}>
           <Text>Post</Text>
         </TouchableOpacity>
- */
+      </View>
+    </View>
+  </Modal>
+ 
+
+      
+    </View>
+  );
+};
+
+export default Admin;

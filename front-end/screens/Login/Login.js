@@ -6,6 +6,7 @@ import {
   Platform,
   Image,
   KeyboardAvoidingView,
+  Alert
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -25,6 +26,7 @@ const Login = (props) => {
 
   useEffect(() => {
     if (props.userData.id) props.navigation.navigate("Admin");
+    
   }, [props.userData]);
 
   let UrlString = "localhost";
@@ -45,7 +47,7 @@ const Login = (props) => {
       })
       .then(function (response) {
         // use async storage to set an item with the key token to the value of the token that was received
-
+      
         props.setUserData(response.data.user);
         return AsyncStorage.setItem("token", response.data.token);
       })
@@ -56,6 +58,9 @@ const Login = (props) => {
         setPassword("");
       })
       .catch(function (error) {
+        
+          Alert.alert("Please check your user email or password")
+    
         console.log(error);
       });
   };

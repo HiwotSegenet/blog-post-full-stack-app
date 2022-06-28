@@ -136,9 +136,20 @@ const Profile = (props) => {
         </Pressable>
 
         <Text style={styles.blogTitle}>{item.subject}</Text>
-        <Text numberOfLines={2} style={styles.blogText}>
+        <Pressable
+              onPress={() => {
+                props.navigation.navigate("Blog", {
+                  item: item,
+                  index: index,
+                  //item: item._id,
+                });
+              }}
+            ><Text numberOfLines={2} style={styles.blogText}>
           {item.text}
         </Text>
+
+            </Pressable>
+        
       </View>
     );
   };

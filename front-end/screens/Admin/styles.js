@@ -85,21 +85,25 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     color: "white",
+    marginBottom: 10,
   },
   blogAuthor: {
-    fontSize: 18,
+    fontSize: 14,
     marginLeft: 20,
-    marginRight: 5,
+    marginTop: 5,
     color: "white",
   },
   blogDot: {
     fontSize: 32,
     color: "white",
+    marginLeft: 10,
+    marginTop: 5,
   },
   blogDate: {
-    fontSize: 16,
+    fontSize: 14,
     color: "white",
     marginLeft: 5,
+    marginTop: 6,
   },
   
   /** Modal Button */

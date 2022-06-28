@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, TextInput,  Pressable, Platform } from 'react-native'
+import { View, Text, Image, TouchableOpacity, TextInput,  Pressable, Platform, Alert } from 'react-native'
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Ionicons } from "@expo/vector-icons";
@@ -20,7 +20,10 @@ const Home = (props) => {
     UrlString = "10.0.2.2";
   }
   const register = () => {
-    axios
+    if(email == "" || password == "" || userName == ""){
+      Alert.alert("Please enter your user name, email and password")
+    } else {
+      axios
       .post(`http://${UrlString}:5054/user/register`, {
         email: email,
         userName: userName,
@@ -28,11 +31,16 @@ const Home = (props) => {
       })
       .then(function (response) {
         props.navigation.navigate("Login");
+        setEmail("")
+        setPassword("")
+        setUserName("")
         console.log(response);
       })
       .catch(function (error) {
         console.log(error);
       });
+    }
+    
   };
 
 

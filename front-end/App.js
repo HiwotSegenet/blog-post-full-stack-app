@@ -7,6 +7,7 @@ import Admin from "./screens/Admin/Admin";
 // import Register from "./screens/Register/Register";
 import Profile from "./screens/Profile/Profile";
 import Edit from "./screens/Edit/Edit";
+import Blog from "./screens/Blog/Blog";
 import { Ionicons } from '@expo/vector-icons'; 
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { FontAwesome5 } from '@expo/vector-icons'; 
@@ -101,6 +102,17 @@ export default function App() {
               blogData={blogData}
               {...props}
             ></Edit>
+          )}
+        </Stack.Screen>
+        <Stack.Screen name="Blog" options={{ headerShown: false }}>
+          {(props) => (
+            <Blog
+              setUserData={setUserData}
+              userData={userData}
+              setBlogData={setBlogData}
+              blogData={blogData}
+              {...props}
+            ></Blog>
           )}
         </Stack.Screen>
       
